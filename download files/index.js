@@ -42,9 +42,9 @@ var options = {
         "position": "right"
     },
     "brandSetting": {
-        "brandName": "Scholastic University",
+        "brandName": "The Bells University",
         "brandSubTitle": "Typically replies within a day",
-        "brandImg": "https://cdn-icons-png.flaticon.com/512/1344/1344761.png",
+        "brandImg": "../images/cropped-Bells-Logo.2png.png",
         "welcomeText": "Hi there!\nHow can I help you?",
         "messageText": "Hello, I have a question about ...",
         "backgroundColor": "#0a5f54",
