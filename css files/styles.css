@@ -18,6 +18,7 @@
   font-size: 16px;
   line-height: 30px;
   width: 40px;
+  scroll-behavior: smooth;
 }
 
 /* end of back to top button */
