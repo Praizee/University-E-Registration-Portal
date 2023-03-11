@@ -1,0 +1,63 @@
+myApp.controller("postUtmeResultCtrl", function($scope, $http, $timeout, $routeParams)
+{
+$scope.showPrint =true;
+$scope.admissionOfficer = "Mrs Afolabi ...";
+$scope.applicantJambNo = {"jambNumber": $routeParams['jambNo']};
+$scope.greetings = "Dear";
+
+
+$http.post("backend/sqlprocesses.php?getApplicant=yes", $scope.applicantJambNo)
+		.success(function(response){
+			//alert(JSON.stringify(response));
+			if(response.status == "ok")
+			{
+				$scope.applicant = response.data;
+				$scope.photo = $scope.applicant.jambRegNo + ".jpg";
+
+			}
+			else if(response.status == "not ok")	
+			{
+				$scope.message = "Unable to retrieve applicant";
+				var modalInstance = $modal.open(
+					{
+					 templateUrl: 'partials/alerts.html',
+					  controller: 'alertCtrl',
+					  keyboard : false,
+					  size:"sm",
+					  resolve: {
+								items: function () {
+								  return items;
+								}
+					  }
+					  
+					});
+			}
+			else
+			{
+			
+			}
+		})
+		.error(function(errorMessage){
+
+	
+		});	
+	
+$scope.printDiv = function(divName)
+{
+	$scope.showPrint = false;
+	printIt(divName);
+	
+}
+
+
+function printIt(divName) {
+
+    printContents = document.getElementById(divName).innerHTML;
+	//alert(printContents);
+     var originalContents = document.body.innerHTML;
+     document.body.innerHTML = printContents;
+
+     window.print();
+     document.body.innerHTML = originalContents;
+}
+});

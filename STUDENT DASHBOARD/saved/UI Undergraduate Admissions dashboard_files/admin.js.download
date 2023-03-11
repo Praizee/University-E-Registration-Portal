@@ -1,0 +1,1369 @@
+myApp.controller("adminDashCtrl", function($rootScope, $scope, $routeParams, $location, $http, Data, $localStorage, $timeout){
+	$scope.bio_data = $localStorage.bio_data;
+	//alert(JSON.stringify($scope.bio_data));
+	/*$rootScope.content_loaded = true;
+	
+	$scope.jambRegNo = $scope.bio_data.jambRegNo;
+	$scope.jambScore = $scope.bio_data.jambScore;
+	$scope.completionStatus = $scope.bio_data.completionStatus;
+	$scope.paymentStatus = $scope.bio_data.paymentStatus;
+	
+	if($scope.jambScore < 200){
+		$scope.eligiblity = false;
+	}
+	else{
+		//alert($scope.jambScore);
+		$scope.eligiblity = true;
+		if($scope.paymentStatus == "NULL" || $scope.paymentStatus == "unpaid" || $scope.paymentStatus === null){
+			//alert('unpaid');
+			$scope.paid = false;
+			$scope.bio_data_completion = false;
+		}
+		else if($scope.completionStatus == "incomplete"){
+			$scope.paid = true;
+			$scope.bio_data_completion = false;
+			$location.path("applicant/applicant-bio-data/"+$scope.jambRegNo);
+		}
+		else{
+			$scope.paid = true;
+			$scope.bio_data_completion = true;
+		}
+	}
+	
+    $scope.simulatePayment = function (jambRegNo) {
+		//alert(jambRegNo);
+		var serviceBase = 'backend/';
+		
+		$http.get(serviceBase+"authentication.php?action=simulate_payment&&jambRegNo="+jambRegNo)
+		.success(function(data) {
+			if(data.status === "success"){
+				$scope.bio_data.paymentStatus = "paid";
+				$localStorage.bio_data = $scope.bio_data;
+				$location.path("applicant/applicant-bio-data/"+$scope.jambRegNo);
+			}
+		})
+		.error(function(data) {
+			$scope.hasError = "A network connection problem error occured while signing in. Please try again";
+		});
+	};
+	*/
+	
+	
+	serviceBase = "backend/";
+	$rootScope.content_loaded = false;
+	
+	$http.get(serviceBase+"authentication.php?action=get_clearance_data")
+	.success(function(data) {
+		$scope.pending_applicants = data.pending_applicants;
+		$scope.cleared_applicants = data.cleared_applicants;
+		
+		$rootScope.content_loaded = true;
+	})
+	.error(function(data) {
+		$scope.hasError = "A network connection problem error occured while signing in. Please try again";
+		
+		$rootScope.content_loaded = true;
+	});
+});
+
+myApp.filter('startFrom', function() {
+ return function(input, start) {
+ if(input) {
+ start = +start; //parse to int
+ return input.slice(start);
+ }
+ return [];
+ }
+});
+
+myApp.controller("adminApplicantCtrl", function($rootScope, $scope, $routeParams, $location, $http, Data, $localStorage){
+	$scope.entry_mode = $routeParams['type'];
+	
+	if($scope.entry_mode == "de" || $scope.entry_mode == "DE"){
+		$rootScope.dispApplicantType = "Direct Entry";
+	}
+	else{
+		$rootScope.dispApplicantType = "UTME";
+	}
+	
+	serviceBase = "backend/";
+	
+	if($rootScope.applicants && $rootScope.entry_mode == $scope.entry_mode){
+		$scope.applicants = $rootScope.applicants;
+		$scope.currentPage = 1; //current page
+		$scope.entryLimit = 20; //max no of items to display in a page
+		$scope.filteredItems = $scope.applicants.length; //Initially for no filter
+		$scope.totalItems = $scope.applicants.length;
+		
+		$rootScope.content_loaded = true;
+	}
+	else{
+		$rootScope.entry_mode = $scope.entry_mode;
+		
+		$http.get(serviceBase+"admin.php?action=get_applicants&&entry_mode="+$rootScope.entry_mode)
+		.success(function(data) {
+			//alert(data.message);
+			if(data.status === "success"){
+				$scope.applicants = data.applicants;
+				$scope.currentPage = 1;
+				$scope.entryLimit = 20;
+				$scope.filteredItems = $scope.applicants.length;
+				$scope.totalItems = $scope.applicants.length;
+				
+				$rootScope.applicants = data.applicants;
+			}
+			else{
+				$scope.applicants = data.applicants;
+				$scope.currentPage = 1;
+				$scope.entryLimit = 20;
+				$scope.filteredItems = $scope.applicants.length;
+				$scope.totalItems = $scope.applicants.length;
+				
+				$rootScope.applicants = data.applicants;
+			}
+			
+			$rootScope.content_loaded = true;
+		})
+		.error(function(data) {
+			$scope.hasError = "A network connection problem error occured while signing in. Please try again";
+			$rootScope.content_loaded = true;
+		});
+	}
+	$scope.setPage = function(pageNo) {
+		$scope.currentPage = pageNo;
+	};
+	
+	$scope.filter = function() {
+		$timeout(function() {
+			alert('filtered');
+			$scope.filteredItems = $scope.filtered.length;
+		}, 10);
+	};
+	
+    $scope.sort_by = function(predicate) {
+        $scope.predicate = predicate;
+        $scope.reverse = !$scope.reverse;
+    };
+	
+});
+
+myApp.controller("adminApplicantDataCtrl", function($rootScope, $scope, $routeParams, $location, $http, Data, $localStorage, $modal){
+	$scope.jambRegNo = $routeParams['jambNo'];	
+	serviceBase = "backend/";
+	
+	$rootScope.content_loaded = false;
+	
+	if($rootScope.jambRegNo && $scope.jambRegNo == $rootScope.jambRegNo){
+		$scope.applicant = $rootScope.applicantData;
+		$scope.applicant_auth_data = $rootScope.applicantAuthData;
+		
+		if(getArrayLength($scope.applicant_auth_data) > 0){
+			$rootScope.reset_password = true;
+		}
+		else{
+			$rootScope.reset_password = false;
+		}
+		
+		$scope.applicant_mode = $scope.applicant.applicantMode;
+		$scope.payment_info = applicantPaymentInfo($scope.applicant.jambScore, $scope.applicant.paymentStatus);
+		$scope.eligibility_info = applicantEligibilityInfo($scope.applicant.jambScore);
+		
+		if($scope.applicant.applicantMode == "utme" || $scope.applicant.applicantMode == "UTME"){
+			$scope.utme_applicant = true;
+		}
+		else{
+			$scope.utme_applicant = false;
+		}
+		
+		$rootScope.content_loaded = true;
+	}
+	else{
+		$rootScope.jambRegNo = $scope.jambRegNo;
+	
+		$http.get(serviceBase+"admin.php?action=get_applicant_data&&jambRegNo="+$scope.jambRegNo)
+		.success(function(data) {
+			if(data.status === "success"){
+				$scope.applicant = data.applicant_data;
+				$scope.applicant_auth_data = data.applicant_auth_data;
+				$rootScope.applicantData = $scope.applicant;
+				$rootScope.applicantAuthData = $scope.applicant_auth_data;
+				
+				if(getArrayLength($scope.applicant_auth_data) > 0){
+					$rootScope.reset_password = true;
+				}
+				else{
+					$rootScope.reset_password = false;
+				}
+				
+				$scope.applicant_mode = $scope.applicant.applicantMode;
+				$scope.payment_info = applicantPaymentInfo($scope.applicant.jambScore, $scope.applicant.paymentStatus);
+				$scope.eligibility_info = applicantEligibilityInfo($scope.applicant.jambScore);
+				
+				if($scope.applicant.applicantMode == "utme" || $scope.applicant.applicantMode == "UTME"){
+					$scope.utme_applicant = true;
+				}
+				else{
+					$scope.utme_applicant = false;
+				}
+			}
+			
+			$rootScope.content_loaded = true;
+		})
+		.error(function(data) {
+			$rootScope.confirm_error_message = "A network connection problem error occured while signing in. Please try again";
+			$timeout(function(){
+			  $rootScope.confirm_error_message = "";
+			}, 1000);
+			
+			$rootScope.content_loaded = true;
+		});
+	}
+	
+	$scope.modalDisplay = "";
+	$scope.animationsEnabled = true;
+	
+	$rootScope.basic_info_dv = true;
+	$rootScope.biodata_dv = false;
+	$rootScope.post_utme_result_dv = false;
+	$rootScope.payment_info_dv = false;
+	$rootScope.eligibility_info_dv = false;
+	$rootScope.create_auth_dv = false;
+	$rootScope.reset_pass_dv = false;
+	$rootScope.update_sample_questions_dv = false;
+	
+    $scope.openBasicInfoDv = function(){
+		//$rootScope.isMain = false;
+		$rootScope.basic_info_dv = true;
+		$rootScope.biodata_dv = false;
+		$rootScope.post_utme_result_dv = false;
+		$rootScope.payment_info_dv = false;
+		$rootScope.eligibility_info_dv = false;
+		$rootScope.create_auth_dv = false;
+		$rootScope.reset_pass_dv = false;
+		$rootScope.delete_auth_dv = false;
+		$rootScope.update_sample_questions_dv = false;
+	};
+	
+    $scope.openPostUTMEResultDv = function(){
+		//$rootScope.isMain = false;
+		$rootScope.basic_info_dv = false;
+		$rootScope.biodata_dv = false;
+		$rootScope.post_utme_result_dv = true;
+		$rootScope.payment_info_dv = false;
+		$rootScope.eligibility_info_dv = false;
+		$rootScope.create_auth_dv = false;
+		$rootScope.reset_pass_dv = false;
+		$rootScope.delete_auth_dv = false;
+		$rootScope.update_sample_questions_dv = false;
+	};
+	
+    $scope.openPaymentInfoDv = function(){
+		//$rootScope.isMain = false;
+		$rootScope.basic_info_dv = false;
+		$rootScope.biodata_dv = false;
+		$rootScope.post_utme_result_dv = false;
+		$rootScope.payment_info_dv = true;
+		$rootScope.eligibility_info_dv = false;
+		$rootScope.create_auth_dv = false;
+		$rootScope.reset_pass_dv = false;
+		$rootScope.delete_auth_dv = false;
+		$rootScope.update_sample_questions_dv = false;
+	};
+	
+    $scope.openEligibiltyInfoDv = function(){
+		//$rootScope.isMain = false;
+		$rootScope.basic_info_dv = false;
+		$rootScope.biodata_dv = false;
+		$rootScope.post_utme_result_dv = false;
+		$rootScope.payment_info_dv = false;
+		$rootScope.eligibility_info_dv = true;
+		$rootScope.create_auth_dv = false;
+		$rootScope.reset_pass_dv = false;
+		$rootScope.delete_auth_dv = false;
+		$rootScope.update_sample_questions_dv = false;
+	};
+	
+    $scope.openCreateAuthDv = function(){
+		//$rootScope.isMain = false;
+		$rootScope.basic_info_dv = false;
+		$rootScope.biodata_dv = false;
+		$rootScope.post_utme_result_dv = false;
+		$rootScope.payment_info_dv = false;
+		$rootScope.eligibility_info_dv = false;
+		$rootScope.create_auth_dv = true;
+		$rootScope.reset_pass_dv = false;
+		$rootScope.delete_auth_dv = false;
+		$rootScope.update_sample_questions_dv = false;
+	};
+	
+    $scope.openResetPassDv = function(){
+		$rootScope.basic_info_dv = false;
+		$rootScope.biodata_dv = false;
+		$rootScope.post_utme_result_dv = false;
+		$rootScope.payment_info_dv = false;
+		$rootScope.eligibility_info_dv = false;
+		$rootScope.create_auth_dv = false;
+		$rootScope.reset_pass_dv = true;
+		$rootScope.delete_auth_dv = false;
+		$rootScope.update_sample_questions_dv = false;
+	};
+	
+    $scope.openDeleteAuthDv = function(){
+		$rootScope.basic_info_dv = false;
+		$rootScope.biodata_dv = false;
+		$rootScope.post_utme_result_dv = false;
+		$rootScope.payment_info_dv = false;
+		$rootScope.eligibility_info_dv = false;
+		$rootScope.create_auth_dv = false;
+		$rootScope.reset_pass_dv = false;
+		$rootScope.delete_auth_dv = true;
+		$rootScope.update_sample_questions_dv = false;
+	};
+	
+    $scope.updateSampleQuestionsDv = function(){
+		$rootScope.basic_info_dv = false;
+		$rootScope.biodata_dv = false;
+		$rootScope.post_utme_result_dv = false;
+		$rootScope.payment_info_dv = false;
+		$rootScope.eligibility_info_dv = false;
+		$rootScope.create_auth_dv = false;
+		$rootScope.reset_pass_dv = false;
+		$rootScope.delete_auth_dv = false;
+		$rootScope.update_sample_questions_dv = true;
+	};
+	
+    $scope.applicantBioDataDv = function(){
+		$rootScope.basic_info_dv = false;
+		$rootScope.biodata_dv = true;
+		$rootScope.post_utme_result_dv = false;
+		$rootScope.payment_info_dv = false;
+		$rootScope.eligibility_info_dv = false;
+		$rootScope.create_auth_dv = false;
+		$rootScope.reset_pass_dv = false;
+		$rootScope.delete_auth_dv = false;
+		$rootScope.update_sample_questions_dv = false;
+	};
+	
+	$scope.openApplicantPaymentInfo = function (size) {
+		$scope.jambScore = $scope.applicant.jambScore;
+		$scope.paymentStatus = $scope.applicant.paymentStatus;
+		
+		if($scope.paymentStatus == "NULL" || $scope.paymentStatus == "unpaid" || $scope.paymentStatus === null){
+			if($scope.jambScore < 200){
+				$scope.bodyInfo = '<i class="icon-remove-sign modal_icn red"></i> <p>This applicant is not eligible for payment.</p>';
+			}
+			else{
+				$scope.bodyInfo = '<i class="icon-remove-sign modal_icn red"></i> <p>This applicant has not paid for the Post-UTME Examination.</p>';
+			}
+		}
+		else{
+			$scope.bodyInfo = '<i class="icon-ok-sign modal_icn green"></i> <p>This applicant has paid for the Post-UTME Examination.</p>';
+		}
+		
+		headerInfo = "Applicant Payment Information";
+		bodyInfo = $scope.bodyInfo;
+		
+		$scope.open(headerInfo, bodyInfo, size);
+	};
+	
+	$scope.openApplicantEligibilityInfo = function (size) {
+		$scope.jambScore = $scope.applicant.jambScore;
+		
+		if($scope.jambScore < 200){
+			$scope.bodyInfo = '<i class="icon-remove-sign modal_icn red"></i> <p>This applicant is not eligible for the Post-UTME Examination.</p>';
+		}
+		else{
+			$scope.bodyInfo = '<i class="icon-ok-sign modal_icn green"></i> <p>This applicant is eligible for the Post-UTME Examination.</p>';
+		}
+		
+		headerInfo = "Applicant Eligibility Information";
+		bodyInfo = $scope.bodyInfo;
+		
+		$scope.open(headerInfo, bodyInfo, size);
+	};
+	
+	$scope.resetPassword = function () {
+		$rootScope.form_values = "";
+		$scope.bodyInfo = '<p>Are you sure you want to reset this applicant\'s password? <br/> <b>Note:</b> This is not reversible.</p>';
+		
+		headerInfo = "Reset Password";
+		bodyInfo = $scope.bodyInfo;
+		
+		$scope.openResetConfirmationDialog(headerInfo, bodyInfo, "");
+	};
+	
+	$scope.createAuthentication = function () {
+		$rootScope.form_values = "";
+		$scope.bodyInfo = '<p>Are you sure you want to create authentication for this applicant? <br/> <b>Note:</b> Once created this appplicant will be able to log into the admission portal.</p>';
+		
+		headerInfo = "Create Autentication Data";
+		bodyInfo = $scope.bodyInfo;
+		
+		$scope.openCreateConfirmationDialog(headerInfo, bodyInfo, "");
+	};
+	
+	$scope.deleteAuthentication = function () {
+		$rootScope.form_values = "";
+		$scope.bodyInfo = '<p>Are you sure you want to delete this applicant\'s authentication data? <br/> <b>Note:</b> This is not reversible and appplicant would be unable to log into the admission portal subsequently.</p>';
+		
+		headerInfo = "Delete Autentication Data";
+		bodyInfo = $scope.bodyInfo;
+		
+		$scope.openDeleteConfirmationDialog(headerInfo, bodyInfo, "");
+	};
+	
+	$scope.addSampleQuestionSubjects = function (no_subjects) {
+		$rootScope.form_values = no_subjects;
+		$scope.bodyInfo = '<p>Are you sure you want to add this number of subjects to those that can be downloaded by this applicant? <br/> <b>Note:</b> This is not reversible.</p>';
+		
+		headerInfo = "Add Sample Questions Subject";
+		bodyInfo = $scope.bodyInfo;
+		//alert(no_subjects);
+		$scope.openQuestionSubjectsConfirmationDialog(headerInfo, bodyInfo, no_subjects, no_subjects);
+	};
+	
+	$scope.open = function (headerInfo, bodyInfo, size) {
+		$rootScope.modalHeader = headerInfo;
+		var modalInstance = $modal.open({
+			animation: $scope.animationsEnabled,
+			templateUrl: 'myModalContent.html',
+			controller: 'ModalInstanceCtrl',
+			size: size,
+			resolve: {
+				modalDisplay: function () {
+					return bodyInfo;
+				}
+			}
+		});
+	};
+	
+	$scope.openCreateConfirmationDialog = function (headerInfo, bodyInfo) {
+		$rootScope.modalHeader = headerInfo;
+		var modalInstance = $modal.open({
+			animation: $scope.animationsEnabled,
+			templateUrl: 'dialogContent.html',
+			controller: 'CreateDialogInstanceCtrl',
+			size: 'sm',
+			resolve: {
+				modalDisplay: function () {
+					return bodyInfo;
+				}
+			}
+		});
+	};
+	
+	$scope.openDeleteConfirmationDialog = function (headerInfo, bodyInfo) {
+		$rootScope.modalHeader = headerInfo;
+		var modalInstance = $modal.open({
+			animation: $scope.animationsEnabled,
+			templateUrl: 'dialogContent.html',
+			controller: 'DeleteDialogInstanceCtrl',
+			size: 'sm',
+			resolve: {
+				modalDisplay: function () {
+					return bodyInfo;
+				}
+			}
+		});
+	};
+	
+	$scope.openResetConfirmationDialog = function (headerInfo, bodyInfo) {
+		$rootScope.modalHeader = headerInfo;
+		var modalInstance = $modal.open({
+			animation: $scope.animationsEnabled,
+			templateUrl: 'dialogContent.html',
+			controller: 'ResetDialogInstanceCtrl',
+			size: 'sm',
+			resolve: {
+				modalDisplay: function () {
+					return bodyInfo;
+				}
+			}
+		});
+	};
+	
+	$scope.openQuestionSubjectsConfirmationDialog = function (headerInfo, bodyInfo) {
+		$rootScope.modalHeader = headerInfo;
+		var modalInstance = $modal.open({
+			animation: $scope.animationsEnabled,
+			templateUrl: 'dialogContent.html',
+			controller: 'AddQuestionSubjectsDialogInstanceCtrl',
+			size: 'sm',
+			resolve: {
+				modalDisplay: function () {
+					return bodyInfo;
+				}
+			}
+		});
+	};
+});
+
+myApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, modalDisplay) {
+	$scope.modalDisplay = modalDisplay;
+	
+	$scope.ok = function () {
+	  $modalInstance.close();
+	};
+});
+
+myApp.controller('CreateDialogInstanceCtrl', function ($rootScope, $scope, $modalInstance, modalDisplay, $http, Data, $localStorage, $modal) {
+	$scope.modalDisplay = modalDisplay;
+	
+	$scope.ok = function (form_values) {
+		//alert('Create Authentication for applicant: '+$rootScope.jambRegNo);
+		$scope.jambRegNo = $rootScope.jambRegNo;
+			
+		serviceBase = "backend/";
+		
+		$http.get(serviceBase+"admin.php?action=create_applicant_auth&&jambRegNo="+$scope.jambRegNo)
+		.success(function(data){
+			//alert(data.message);
+			if(data.status === "success"){
+				//$scope.applicant = data.applicant_data;
+				//$rootScope.applicantData = $scope.applicant;
+				
+				$scope.applicant_auth_data = data.applicant_auth_data;
+				$rootScope.applicantAuthData = $scope.applicant_auth_data;
+				
+				if(getArrayLength($scope.applicant_auth_data) > 0){
+					$rootScope.reset_password = true;
+				}
+				else{
+					$rootScope.reset_password = false;
+				}
+				
+				$rootScope.basic_info_dv = true;
+				$rootScope.biodata_dv = false;
+				$rootScope.post_utme_result_dv = false;
+				$rootScope.payment_info_dv = false;
+				$rootScope.eligibility_info_dv = false;
+				$rootScope.create_auth_dv = false;
+				$rootScope.reset_pass_dv = false;
+				$rootScope.delete_auth_dv = false;
+				$rootScope.update_sample_questions_dv = false;
+				/**/
+				
+				$rootScope.confirm_success_message = data.message;
+				$timeout(function(){
+				  $rootScope.confirm_success_message = "";
+				}, 1000);
+			}
+			else{
+				
+			}
+			
+			$modalInstance.close();
+		})
+		.error(function(data) {
+			$rootScope.confirm_error_message = "A network connection problem error occured while signing in. Please try again";
+			$timeout(function(){
+			  $rootScope.confirm_error_message = "";
+			}, 1000);
+			
+			$modalInstance.close();
+		});
+		
+		//$modalInstance.close();
+	};
+	
+	$scope.cancel = function () {
+	  $modalInstance.close();
+	};
+});
+
+myApp.controller('ResetDialogInstanceCtrl', function ($rootScope, $scope, $modalInstance, modalDisplay, $http, Data, $localStorage, $modal, $timeout) {
+	$scope.modalDisplay = modalDisplay;
+	
+	$scope.ok = function (form_values) {
+		$scope.jambRegNo = $rootScope.jambRegNo;
+			
+		serviceBase = "backend/";
+		
+		$http.get(serviceBase+"admin.php?action=reset_applicant_auth&&jambRegNo="+$scope.jambRegNo)
+		.success(function(data){
+			//alert(data.message);
+			if(data.status === "success"){
+				$scope.applicant_auth_data = data.applicant_auth_data;
+				$rootScope.applicantAuthData = $scope.applicant_auth_data;
+				
+				$rootScope.confirm_success_message = data.message;
+				$timeout(function(){
+				  $rootScope.confirm_success_message = "";
+				}, 1000);
+			}
+			else{
+				$rootScope.confirm_error_message = data.message;
+				$timeout(function(){
+				  $rootScope.confirm_error_message = "";
+				}, 1000);
+			}
+			
+			$modalInstance.close();
+		})
+		.error(function(data) {
+			$rootScope.confirm_error_message = "A network connection problem error occured while signing in. Please try again";
+			$timeout(function(){
+			  $rootScope.confirm_error_message = "";
+			}, 1000);
+			
+			$modalInstance.close();
+		});
+	};
+	
+	$scope.cancel = function () {
+	  $modalInstance.close();
+	};
+});
+
+myApp.controller('DeleteDialogInstanceCtrl', function ($rootScope, $scope, $modalInstance, modalDisplay, $http, Data, $localStorage, $modal) {
+	$scope.modalDisplay = modalDisplay;
+	
+	$scope.ok = function (form_values) {
+		$scope.jambRegNo = $rootScope.jambRegNo;
+			
+		serviceBase = "backend/";
+		
+		$http.get(serviceBase+"admin.php?action=delete_applicant_auth&&jambRegNo="+$scope.jambRegNo)
+		.success(function(data){
+			//alert(data.message);
+			if(data.status === "success"){
+				//$scope.applicant = data.applicant_data;
+				//$rootScope.applicantData = $scope.applicant;
+				
+				$scope.applicant_auth_data = data.applicant_auth_data;
+				$rootScope.applicantAuthData = $scope.applicant_auth_data;
+				
+				if(getArrayLength($scope.applicant_auth_data) > 0){
+					$rootScope.reset_password = true;
+				}
+				else{
+					$rootScope.reset_password = false;
+				}/**/
+				
+				$rootScope.basic_info_dv = true;
+				$rootScope.biodata_dv = false;
+				$rootScope.post_utme_result_dv = false;
+				$rootScope.payment_info_dv = false;
+				$rootScope.eligibility_info_dv = false;
+				$rootScope.create_auth_dv = false;
+				$rootScope.reset_pass_dv = false;
+				$rootScope.delete_auth_dv = false;
+				$rootScope.update_sample_questions_dv = false;
+				/**/
+				
+				$rootScope.confirm_success_message = data.message;
+				$timeout(function(){
+				  $rootScope.confirm_success_message = "";
+				}, 1000);
+			}
+			else{
+				
+			}
+			
+			$modalInstance.close();
+		})
+		.error(function(data) {
+			$rootScope.confirm_error_message = "A network connection problem error occured while signing in. Please try again";
+			$timeout(function(){
+			  $rootScope.confirm_error_message = "";
+			}, 1000);
+			
+			$modalInstance.close();
+		});
+	};
+	
+	$scope.cancel = function () {
+	  $modalInstance.close();
+	};
+});
+
+myApp.controller('AddQuestionSubjectsDialogInstanceCtrl', function ($rootScope, $scope, $modalInstance, modalDisplay, $http, Data, $localStorage, $modal) {
+	$scope.modalDisplay = modalDisplay;
+	
+	$scope.ok = function (no_subjects) {
+		//$rootScope.jambRegNo
+		$scope.no_subjects = no_subjects;
+		$scope.jambRegNo = $rootScope.jambRegNo;
+			
+		serviceBase = "backend/";
+		
+		$http.get(serviceBase+"admin.php?action=add_additional_applicant_question_subjects&&jambRegNo="+$scope.jambRegNo+"&&no_of_subjects="+$scope.no_subjects)
+		.success(function(data){
+			//alert(data.message);
+			if(data.status === "success"){
+				$modalInstance.close();
+				
+				$rootScope.confirm_success_message = data.message;
+				$timeout(function(){
+				  $rootScope.confirm_success_message = "";
+				}, 1000);
+			}
+			else{
+				
+			}
+			
+			$modalInstance.close();
+		})
+		.error(function(data) {
+			$rootScope.confirm_error_message = "A network connection problem error occured while signing in. Please try again";
+			$timeout(function(){
+			  $rootScope.confirm_error_message = "";
+			}, 1000);
+			
+			$modalInstance.close();
+		});
+	};
+	
+	$scope.cancel = function () {
+	  $modalInstance.close();
+	};
+});
+
+function getArrayLength(arr) {
+    if(arr.length !== undefined){
+		arr_length = arr.length;
+	}
+	else{
+		arr_length = Object.keys(arr).length;
+	}
+	
+    return arr_length;
+};
+
+function applicantPaymentInfo(jambScore, paymentStatus) {
+	if(paymentStatus == "NULL" || paymentStatus == "unpaid" || paymentStatus === null){
+		if(jambScore < 200){
+			bodyInfo = '<i class="icon-remove-sign modal_icn red"></i> <p>This applicant is not eligible for payment.</p>';
+		}
+		else{
+			bodyInfo = '<i class="icon-remove-sign modal_icn red"></i> <p>This applicant has not paid for the Post-UTME Examination.</p>';
+		}
+	}
+	else{
+		bodyInfo = '<i class="icon-ok-sign modal_icn green"></i> <p>This applicant has paid for the Post-UTME Examination.</p>';
+	}
+	
+	return bodyInfo;
+};
+
+function applicantEligibilityInfo(jambScore) {
+	if(jambScore < 200){
+		bodyInfo = '<i class="icon-remove-sign modal_icn red"></i> <p>This applicant is not eligible for the Post-UTME Examination.</p>';
+	}
+	else{
+		bodyInfo = '<i class="icon-ok-sign modal_icn green"></i> <p>This applicant is eligible for the Post-UTME Examination.</p>';
+	}
+	
+	return bodyInfo;
+};
+
+myApp.controller("adminSearchApplicantCtrl", function($rootScope, $scope, $routeParams, $location, $http, Data, $localStorage){	
+	serviceBase = "backend/";
+	$rootScope.content_loaded = true;
+	
+		
+			$scope.setPage = function(pageNo) {
+				$scope.currentPage = pageNo;
+			};
+			
+			$scope.filter = function() {
+				$timeout(function() {
+					alert('filtered');
+					$scope.filteredItems = $scope.filtered.length;
+				}, 10);
+			};
+			
+			$scope.sort_by = function(predicate) {
+				$scope.predicate = predicate;
+				$scope.reverse = !$scope.reverse;
+			};
+	$scope.searchApplicant = function(search){
+		if(search.term != ""){
+			$rootScope.content_loaded = false;
+			$http.get(serviceBase+"admin.php?action=search_applicants&&search_term="+search.term)
+			.success(function(data) {
+				if(data.status === "success"){
+					$scope.applicants = data.applicants;
+					$scope.currentPage = 1;
+					$scope.entryLimit = 20;
+					$scope.filteredItems = $scope.applicants.length;
+					$scope.totalItems = $scope.applicants.length;
+					
+					//$rootScope.applicants = data.applicants;
+				}
+				else{
+					$scope.applicants = data.applicants;
+					$scope.currentPage = 1;
+					$scope.entryLimit = 20;
+					$scope.filteredItems = $scope.applicants.length;
+					$scope.totalItems = $scope.applicants.length;
+					
+					//$rootScope.applicants = data.applicants;
+				}
+		    //alert($scope.applicants.length);
+				
+				$rootScope.content_loaded = true;
+			})
+			.error(function(data) {
+				$scope.hasError = "A network connection problem error occured while signing in. Please try again";
+				$rootScope.content_loaded = true;
+			});
+			
+		}
+		else{
+			
+		}
+		
+	}
+	
+});
+
+myApp.controller("AccountManagementCtrl", function($rootScope, $scope, $routeParams, $location, $http, Data, $localStorage, $modal){
+	$rootScope.content_loaded = false;
+	$scope.submitting = false;
+	
+	$scope.user_details = $localStorage.user_details;
+	$scope.username = $scope.user_details.username;
+	$scope.user_type = $scope.user_details.userType;
+		
+	serviceBase = "backend/";
+	
+	if($scope.user_type == "admin"){
+		$scope.isSuperAdmin = false;
+		$scope.userType = "Admin";
+		
+		$scope.add_admin = false;
+		$scope.view_admins = false;
+		$scope.my_details = true;
+		$scope.change_password = false;
+		
+		$scope.closeAllDivs = function(){
+			$scope.my_details = false;
+			$scope.change_password = false;
+		}
+	}
+	else if($scope.user_type == "admission"){
+		$scope.isSuperAdmin = false;
+		$scope.userType = "Admission";
+		
+		$scope.add_admin = false;
+		$scope.view_admins = false;
+		$scope.my_details = true;
+		$scope.change_password = false;
+		
+		$scope.closeAllDivs = function(){
+			$scope.my_details = false;
+			$scope.change_password = false;
+		}
+	}
+	else{
+		$scope.isSuperAdmin = true;
+		$scope.userType = "Super Admin";
+		
+		$scope.add_admin = false;
+		$scope.view_admins = false;
+		$scope.my_details = true;
+		$scope.change_password = false;
+		
+		$scope.admins = [];
+		
+		$scope.closeAllDivs = function(){
+			$scope.add_admin = false;
+			$scope.view_admins = false;
+			$scope.my_details = false;
+			$scope.change_password = false;
+		}
+		
+		if($rootScope.admins){
+			$scope.admins = $rootScope.admins;
+			
+			$rootScope.content_loaded = true;
+		}
+		else{
+			$http.get(serviceBase+"admin.php?action=get_admins&&current_admin="+$scope.username)
+			.success(function(data) {
+				//alert(data.message);
+				if(data.status === "success"){
+					$scope.admins = data.admins
+					$rootScope.admins = data.admins;
+				}
+				
+				$rootScope.content_loaded = true;
+			})
+			.error(function(data) {
+				message_code = {status: 'error', message: 'A network connection problem error occured while connecting. Please try again'};
+				Data.toast(message_code);
+				
+				$rootScope.content_loaded = true;
+			});
+		}
+	}
+		
+	$rootScope.content_loaded = true;
+	
+    $scope.addAdmin = function (admin) {
+		$scope.admin_data = admin;
+		$scope.submitting = true;
+		
+		if($scope.admin_data.username.length < 6){
+			message_code = {
+							  status: 'error',
+							  message: 'Username must be at least 6 characters or more'
+						  };
+			Data.toast(message_code);
+			
+			$scope.submitting = false;
+		}
+		else if($scope.admin_data.password.length < 6){
+			message_code = {
+							  status: 'error',
+							  message: 'Password must be at least 6 characters or more'
+						  };
+			Data.toast(message_code);
+			$scope.submitting = false;
+		}
+		else{
+		    $rootScope.content_loaded = false;
+		    
+			$http.post(serviceBase+"admin.php?action=add_admin&&current_admin="+$scope.username, $scope.admin_data)
+			.success(function(data) {
+				Data.toast(data);
+				if(data.status === "success"){
+					$scope.admins = data.admins
+					$rootScope.admins = data.admins;
+					$scope.admin = {
+									  username: '',
+									  password: '',
+									  admin_type: ''
+								  };
+				}
+				$scope.submitting = false;
+				$rootScope.content_loaded = true;
+			})
+			.error(function(data) {
+				message_code = {
+							  status: 'error',
+							  message: 'A network connection problem error occured while connecting. Please try again'
+						  };
+				Data.toast(message_code);
+				$scope.submitting = false;
+				$rootScope.content_loaded = true;
+			});
+		}
+    };
+	
+    $scope.changePassword = function (change_pass) {
+        alert();
+		$scope.change_password_data = change_pass;
+		$scope.submitting = true;
+		
+		//alert(JSON.stringify($scope.change_password_data));
+		if($scope.change_password_data.new_password.length < 6){
+			message_code = {
+							  status: 'error',
+							  message: 'Password must be at least 6 characters or more'
+						  };
+			Data.toast(message_code);
+			
+			$scope.submitting = false;
+		}
+		else if($scope.change_password_data.new_password !== $scope.change_password_data.confirm_password){
+			message_code = {
+							  status: 'error',
+							  message: 'Values entered for New Password and to Confirm Password do not match'
+						  };
+			Data.toast(message_code);
+			
+			$scope.submitting = false;
+		}
+		else{
+		    $rootScope.content_loaded = false;
+		    
+			$http.post(serviceBase+"admin.php?action=change_password&&current_admin="+$scope.username, $scope.change_password_data)
+
+			.success(function(data) {
+				Data.toast(data);
+				if(data.status === "success"){
+					$scope.admins = data.admins
+					$rootScope.admins = data.admins;
+				}
+				
+				$scope.submitting = false;
+				$rootScope.content_loaded = true;
+			})
+			.error(function(data) {
+				message_code = {status: 'error', message: 'A network connection problem error occured while connecting. Please try again'};
+				Data.toast(message_code);
+				
+				$scope.submitting = false;
+				$rootScope.content_loaded = true;
+			});
+		}
+    };
+	
+    $scope.resetAdminPassword = function (reset_username) {
+		$scope.reset_username = reset_username;
+		
+		//alert(JSON.stringify($scope.reset_username));
+		
+		$rootScope.content_loaded = false;
+		$http.get(serviceBase+"admin.php?action=reset_admin&&username="+$scope.reset_username)
+		.success(function(data) {
+			Data.toast(data);
+			if(data.status === "success"){
+				/*$scope.admins = data.admins
+				$rootScope.admins = data.admins;*/
+			}
+			
+			$rootScope.content_loaded = true;
+		})
+		.error(function(data) {
+			message_code = {status: 'error', message: 'A network connection problem error occured while connecting. Please try again'};
+			Data.toast(message_code);
+			$rootScope.content_loaded = true;
+		});
+    };
+	
+    $scope.deleteAdminPassword = function (delete_username) {
+		$scope.delete_username = delete_username;
+		
+		//alert(JSON.stringify($scope.delete_username));
+		$rootScope.content_loaded = false;
+		$http.get(serviceBase+"admin.php?action=delete_admin&&username="+$scope.delete_username+"&&current_admin="+$scope.username)
+		.success(function(data) {
+			Data.toast(data);
+			if(data.status === "success"){
+				$scope.admins = data.admins
+				$rootScope.admins = data.admins;
+			}
+			
+			$rootScope.content_loaded = true;
+		})
+		.error(function(data) {
+			message_code = {status: 'error', message: 'A network connection problem error occured while connecting. Please try again'};
+			Data.toast(message_code);
+			
+			$rootScope.content_loaded = true;
+		});
+    };
+	
+    $scope.openAddAdminDv = function(){
+		$scope.closeAllDivs();
+		$scope.add_admin = true;
+	};
+	
+    $scope.openViewAdminsDv = function(){
+		$scope.closeAllDivs();
+		$scope.view_admins = true;
+	};
+	
+    $scope.openViewDetailsDv = function(){
+		$scope.closeAllDivs();
+		$scope.my_details = true;
+	};
+	
+    $scope.openChangePasswordDv = function(){
+		$scope.closeAllDivs();
+		$scope.change_password = true;
+	};
+	
+});
+
+
+
+myApp.controller("clearanceProcessCtrl", function($rootScope, $scope, $routeParams, $location, $http, Data, $localStorage){
+	$rootScope.content_loaded = false;
+	$scope.clearance_type = $routeParams['type'];
+	
+	if($scope.clearance_type == "pending"){
+		$rootScope.dispApplicantType = "All Pending Applicants";
+	}
+	else if($scope.clearance_type == "cleared"){
+		$rootScope.dispApplicantType = "All Cleared Applicants";
+	}
+	else{
+		$rootScope.dispApplicantType = "Upload Cleared Applicants";
+	}
+	
+	serviceBase = "backend/";
+	$scope.filter_elems = false;
+	
+	$scope.filter_dets = {
+							  start_date: '',
+							  end_date: ''
+						  };
+	
+	$scope.dateOptions = {
+	  formatYear: 'yyyy',
+	  startingDay: 1
+	};
+  
+	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate', 'yyyy-MM-dd' ];
+	$scope.format = $scope.formats[4];
+	
+	$scope.convertDate = function(date1){
+		date = new Date(date1);
+		year = date.getFullYear();
+		month = date.getMonth()+1;
+		dt = date.getDate();
+		
+		if (dt < 10) {
+		  dt = '0' + dt;
+		}
+		if (month < 10) {
+		  month = '0' + month;
+		}
+		
+		//console.log(year+'-' + month + '-'+dt);
+		return year+'-' + month + '-'+dt;
+	}
+	
+	if($scope.clearance_type == "pending" || $scope.clearance_type == "cleared"){
+		if($rootScope.applicants && $rootScope.clearance_type == $scope.clearance_type){
+			$scope.applicants = $rootScope.applicants;
+			$scope.currentPage = 1; //current page
+			$scope.entryLimit = 50; //max no of items to display in a page
+			$scope.filteredItems = $scope.applicants.length; //Initially for no filter
+			$scope.totalItems = $scope.applicants.length;
+			
+			$rootScope.content_loaded = true;
+		}
+		else{
+			$rootScope.clearance_type = $scope.clearance_type;
+			
+			$http.get(serviceBase+"authentication.php?action=get_clearance_applicants&&clearance_type="+$rootScope.clearance_type)
+			.success(function(data) {
+				//alert(data.message);
+				if(data.status === "success"){
+					$scope.applicants = data.applicants;
+					$scope.currentPage = 1;
+					$scope.entryLimit = 50;
+					$scope.filteredItems = $scope.applicants.length;
+					$scope.totalItems = $scope.applicants.length;
+					
+					$rootScope.applicants = data.applicants;
+				}
+				else{
+					$scope.applicants = data.applicants;
+					$scope.currentPage = 1;
+					$scope.entryLimit = 50;
+					$scope.filteredItems = $scope.applicants.length;
+					$scope.totalItems = $scope.applicants.length;
+					
+					$rootScope.applicants = data.applicants;
+				}
+				
+				$rootScope.content_loaded = true;
+			})
+			.error(function(data) {
+				$scope.hasError = "A network connection problem error occured while signing in. Please try again";
+				
+				$rootScope.content_loaded = true;
+			});
+		}
+		
+		$scope.setPage = function(pageNo) {
+			$scope.currentPage = pageNo;
+		};
+		
+		$scope.filter = function() {
+			$timeout(function() {
+				alert('filtered');
+				$scope.filteredItems = $scope.filtered.length;
+			}, 10);
+		};
+		
+		$scope.sort_by = function(predicate) {
+			$scope.predicate = predicate;
+			$scope.reverse = !$scope.reverse;
+		};
+		
+		$scope.downloadClearancePDF = function (jambRegNo) {
+			clearance_file = '../clearance_docs/'+jambRegNo+'/'+jambRegNo+'_clearance.pdf';
+			window.open('backend/saveAsPDF.php?file_source='+clearance_file, '_self', '');
+		};
+		
+		$scope.downloadClearanceZIP = function (jambRegNo) {
+			clearance_zip = '../clearance_zipped_docs/'+jambRegNo+'_download.zip';
+			window.open('backend/saveAsZIP.php?file_source='+clearance_zip, '_self', '');
+		};
+		
+		
+		$scope.openFilterPanel = function(){
+			$scope.filter_elems = true;
+		}
+		
+		$scope.closeFilterPanel = function(){
+			$scope.filter_elems = false;
+		}
+		
+		$scope.filterApplicants = function(filter_dets) {
+			$scope.filter_dets = filter_dets;
+			$scope.filter_dets.start_date = $scope.convertDate($scope.filter_dets.start_date);
+			$scope.filter_dets.end_date = $scope.convertDate($scope.filter_dets.end_date);
+			
+			if($scope.filter_dets.start_date == "NaN-NaN-NaN" || $scope.filter_dets.start_date == "1970-01-01"){
+				$scope.filter_dets.start_date = "";
+			}
+			
+			if($scope.filter_dets.end_date == "NaN-NaN-NaN" || $scope.filter_dets.end_date == "1970-01-01"){
+				$scope.filter_dets.end_date = "";
+			}
+			
+			$scope.submitting = true;
+			
+			$rootScope.content_loaded = false;
+			clearance_type = $scope.clearance_type;
+			
+			$http.post(serviceBase+"authentication.php?action=filter_clearance_applicants&&clearance_type="+$rootScope.clearance_type, $scope.filter_dets)
+			.success(function(data) {
+				//alert(data.message);
+				if(data.status === "success"){
+					$scope.applicants = data.applicants;
+					$scope.currentPage = 1;
+					$scope.entryLimit = 50;
+					$scope.filteredItems = $scope.applicants.length;
+					$scope.totalItems = $scope.applicants.length;
+					
+					$rootScope.applicants = data.applicants;
+				}
+				else{
+					$scope.applicants = data.applicants;
+					$scope.currentPage = 1;
+					$scope.entryLimit = 50;
+					$scope.filteredItems = $scope.applicants.length;
+					$scope.totalItems = $scope.applicants.length;
+					
+					$rootScope.applicants = data.applicants;
+				}
+				
+				//alert($scope.convertDate($scope.filter_dets.start_date));
+				if($scope.clearance_type == "pending"){
+					if($scope.filter_dets.start_date != "" && $scope.filter_dets.end_date != ""){
+						$rootScope.dispApplicantType = "Pending Applicants between "+$scope.filter_dets.start_date+" and "+$scope.filter_dets.end_date;
+					}
+					else if($scope.filter_dets.start_date != ""){
+						$rootScope.dispApplicantType = "Pending Applicants after "+$scope.filter_dets.start_date;
+					}
+					else if($scope.filter_dets.end_date != ""){
+						$rootScope.dispApplicantType = "Pending Applicants before "+$scope.filter_dets.end_date;
+					}
+					else if($scope.filter_dets.end_date != ""){
+						$rootScope.dispApplicantType = "All Pending Applicants";
+					}
+				}
+				else if($scope.clearance_type == "cleared"){
+					if($scope.filter_dets.start_date != "" && $scope.filter_dets.end_date != ""){
+						$rootScope.dispApplicantType = "Cleared Applicants between "+$scope.filter_dets.start_date+" and "+$scope.filter_dets.end_date;
+					}
+					else if($scope.filter_dets.start_date != ""){
+						$rootScope.dispApplicantType = "Cleared Applicants after "+$scope.filter_dets.start_date;
+					}
+					else if($scope.filter_dets.end_date != ""){
+						$rootScope.dispApplicantType = "Cleared Applicants before "+$scope.filter_dets.end_date;
+					}
+					else if($scope.filter_dets.end_date != ""){
+						$rootScope.dispApplicantType = "All Cleared Applicants";
+					}
+				}
+				$scope.filter_elems = false;
+				$scope.submitting = false;
+				$rootScope.content_loaded = true;
+			})
+			.error(function(data) {
+				$scope.hasError = "A network connection problem error occured while signing in. Please try again";
+				
+			
+				$scope.filter_elems = false;
+				$scope.submitting = false;
+				$rootScope.content_loaded = true;
+			});
+		
+		}
+		
+		$scope.downloadApplicantsPDFs = function() {
+			$rootScope.content_loaded = false;
+			clearance_type = $scope.clearance_type;
+			
+			$http.post(serviceBase+"authentication.php?action=download_applicant_pdfs&&clearance_type="+$rootScope.clearance_type, $scope.filter_dets)
+			.success(function(data) {
+				//alert(data.message);
+				if(data.status === "success"){
+					$scope.download_zip = data.download_zip;
+					
+					window.open('backend/saveAsZIP.php?file_source='+$scope.download_zip, '_self', '');
+				}
+				
+				$rootScope.content_loaded = true;
+			})
+			.error(function(data) {
+				$scope.hasError = "A network connection problem error occured while signing in. Please try again";
+				
+				$rootScope.content_loaded = true;
+			});
+		
+		}
+		
+		$scope.downloadApplicantsZIPs = function() {
+			$rootScope.content_loaded = false;
+			clearance_type = $scope.clearance_type;
+			
+			$http.post(serviceBase+"authentication.php?action=download_applicant_zips&&clearance_type="+$rootScope.clearance_type, $scope.filter_dets)
+			.success(function(data) {
+				//alert(data.message);
+				if(data.status === "success"){
+					$scope.download_zip = data.download_zip;
+					
+					window.open('backend/saveAsZIP.php?file_source='+$scope.download_zip, '_self', '');
+				}
+				
+				$rootScope.content_loaded = true;
+			})
+			.error(function(data) {
+				$scope.hasError = "A network connection problem error occured while signing in. Please try again";
+				
+				$rootScope.content_loaded = true;
+			});
+		
+		}
+		
+	}
+	else{
+		$rootScope.content_loaded = true;
+		
+			
+		$scope.pickupthefile = function(files){  
+			var fd1 = new FormData();
+			fd1.append("file", files[0]);
+			$scope.fd1 = fd1;
+		}
+		
+		
+		$scope.uploadfile = function(){
+			if($scope.fd1===undefined){
+				message_code = {status: 'error', message: 'Error. No file was chosen to be uploaded.'};
+				Data.toast(message_code);
+			}
+			else{
+				//alert(JSON.stringify());=
+				$rootScope.content_loaded = false;
+				$scope.unsaved = "";
+				
+				$http.post("backend/upload_supl.php?whichFolder=uploadedfilefolder&&current_admin="+$localStorage.user_details._id, $scope.fd1, {withCredentials: true, headers: {'Content-Type': undefined },transformRequest: angular.identity })
+				.success(function(data){
+					$rootScope.content_loaded = true;
+					
+					Data.toast(data);
+					$scope.num_cleared = data.num_cleared;
+					$scope.uncleared = data.uncleared;
+				})
+				.error(function(errorMessage){
+					$rootScope.content_loaded = true;
+					Data.toast(data);
+				});
+			}
+		}
+		
+	}
+	
+});

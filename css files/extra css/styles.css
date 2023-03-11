@@ -1,0 +1,1404 @@
+< !--table {
+    mso-displayed-decimal-separator: "\.";
+    mso-displayed-thousand-separator: "\,";
+}
+
+@page {
+    margin: 0in .36in 0in 0in;
+    mso-header-margin: 0in;
+    mso-footer-margin: 0in;
+    mso-horizontal-page-align: center;
+    mso-vertical-page-align: center;
+}
+
+-->tr {
+    mso-height-source:
+        auto;
+}
+
+col {
+    mso-width-source:
+        auto;
+}
+
+br {
+    mso-data-placement:
+        same-cell;
+}
+
+.style0 {
+    mso-number-format:
+        General;
+    text-align: general;
+    vertical-align: bottom;
+    white-space: nowrap;
+    mso-rotate: 0;
+    mso-background-source: auto;
+    mso-pattern: auto;
+    color: black;
+    font-size: 10.0pt;
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: none;
+    font-family: Arial;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    border: none;
+    mso-protection: locked visible;
+    mso-style-name: Normal;
+    mso-style-id: 0;
+}
+
+td {
+    mso-style-parent:
+        style0;
+    padding: 0px;
+    mso-ignore: padding;
+    color: black;
+    font-size: 10.0pt;
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: none;
+    font-family: Arial;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    mso-number-format: General;
+    text-align: general;
+    vertical-align: bottom;
+    border: none;
+    mso-background-source: auto;
+    mso-pattern: auto;
+    mso-protection: locked visible;
+    white-space: nowrap;
+    mso-rotate: 0;
+}
+
+.xl65 {
+    mso-style-parent:
+        style0;
+    font-size: 12.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    vertical-align: middle;
+    background: #1155CC;
+    mso-pattern: #1155CC none;
+}
+
+.xl66 {
+    mso-style-parent:
+        style0;
+    font-size: 13.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    vertical-align: top;
+    padding-top:
+        10px;
+}
+
+.xl67 {
+    mso-style-parent:
+        style0;
+    color: #4D4E4D;
+    font-size: 20.0pt;
+    font-weight: 700;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    vertical-align: middle;
+}
+
+.xl68 {
+    mso-style-parent:
+        style0;
+    color: #4472C4;
+    font-size: 22.0pt;
+    font-weight: 700;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.xl69 {
+    mso-style-parent:
+        style0;
+    color: white;
+    font-size: 24.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: center;
+    vertical-align: top;
+    background: #1155CC;
+    mso-pattern: #1155CC none;
+    white-space: normal;
+}
+
+.xl70 {
+    mso-style-parent:
+        style0;
+    color: #7F7F7F;
+    font-size: 18.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    white-space: normal;
+}
+
+.xl71 {
+    mso-style-parent:
+        style0;
+    color: windowtext;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+}
+
+.xl72 {
+    mso-style-parent:
+        style0;
+    color: windowtext;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.xl73 {
+    mso-style-parent:
+        style0;
+    color: #7F7F7F;
+    font-size: 18.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: right;
+    vertical-align: middle;
+    white-space: normal;
+}
+
+.xl74 {
+    mso-style-parent:
+        style0;
+    color: white;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl75 {
+    mso-style-parent:
+        style0;
+    color: white;
+    font-size: 11.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.xl76 {
+    mso-style-parent:
+        style0;
+    color: #1F3864;
+    font-size: 9.0pt;
+    font-weight: 700;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    mso-number-format: "m\/d\/yyyy";
+    text-align: center;
+    vertical-align: middle;
+    border-top: none;
+    border-right: none;
+    border-bottom: 0.5pt solid #BFBFBF;
+    border-left: none;
+}
+
+.xl77 {
+    mso-style-parent:
+        style0;
+    color: #1F3864;
+    font-size: 9.0pt;
+    font-weight: 700;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.xl78 {
+    mso-style-parent:
+        style0;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    mso-number-format: "Short
+ Date";
+ text-align:center;
+    vertical-align: middle;
+}
+
+.xl79 {
+    mso-style-parent:
+        style0;
+    color: #1F3864;
+    font-size: 9.0pt;
+    font-weight: 700;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: center;
+    vertical-align: middle;
+    border-top: none;
+    border-right: none;
+    border-bottom: 0.5pt solid #BFBFBF;
+    border-left: none;
+}
+
+.xl80 {
+    mso-style-parent:
+        style0;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.xl81 {
+    mso-style-parent:
+        style0;
+    color: windowtext;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl82 {
+    mso-style-parent:
+        style0;
+    color: #0070C0;
+    font-size: 11.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.xl83 {
+    mso-style-parent:
+        style0;
+    color: #333F4F;
+    font-size: 9.0pt;
+    font-style: italic;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: right;
+    vertical-align: top;
+}
+
+.xl84 {
+    mso-style-parent:
+        style0;
+    color: #1F3864;
+    font-size: 16.0pt;
+    font-weight: 700;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    border-top: none;
+    border-right: none;
+    border-bottom: .5pt solid #BFBFBF;
+    border-left: none;
+}
+
+#mytable td {
+    mso-style-parent:
+        style0;
+    color: #1F3864;
+    font-size: 13.0pt;
+    font-weight: 500;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    border-top: none;
+    border-right: none;
+    border-bottom: .5pt solid #BFBFBF;
+    border-left: none;
+}
+
+.xl85 {
+    mso-style-parent:
+        style0;
+    color: #1F3864;
+    font-size: 11.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    vertical-align: middle;
+}
+
+.xl86 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl87 {
+    mso-style-parent:
+        style0;
+    font-family: Roboto;
+    font-size:
+        11pt;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.xl88 {
+    mso-style-parent:
+        style0;
+    color: white;
+    font-size: 9.0pt;
+    font-weight: 700;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: center;
+    vertical-align: middle;
+    border-top: none;
+    border-right: none;
+    border-bottom: .5pt solid #BFBFBF;
+    border-left: none;
+    background: #1155CC;
+    mso-pattern: #1155CC none;
+}
+
+.xl89 {
+    mso-style-parent:
+        style0;
+    font-size: 11.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    border-top: none;
+    border-right: none;
+    border-bottom: .5pt solid #BFBFBF;
+    border-left: .5pt solid #BFBFBF;
+    padding:
+        5px;
+}
+
+.xl90 {
+    mso-style-parent:
+        style0;
+    font-size: 11.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    mso-number-format: Fixed;
+    text-align: right;
+    vertical-align: middle;
+    border-top: none;
+    border-right: .5pt solid #BFBFBF;
+    border-bottom: .5pt solid #BFBFBF;
+    border-left: .5pt solid #BFBFBF;
+    padding:
+        5px;
+}
+
+.xl91 {
+    mso-style-parent:
+        style0;
+    font-size: 9.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    mso-number-format: Fixed;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.xl92 {
+    mso-style-parent:
+        style0;
+    font-size: 9.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    border-top: .5pt solid #BFBFBF;
+    border-right: none;
+    border-bottom: .5pt solid #BFBFBF;
+    border-left: .5pt solid #BFBFBF;
+    background: #F3F3F3;
+    mso-pattern: #F3F3F3 none;
+}
+
+.xl93 {
+    mso-style-parent:
+        style0;
+    font-size: 9.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    mso-number-format: Fixed;
+    text-align: right;
+    vertical-align: middle;
+    border: .5pt solid #BFBFBF;
+    background: #F3F3F3;
+    mso-pattern: #F3F3F3 none;
+}
+
+.xl94 {
+    mso-style-parent:
+        style0;
+    font-size: 9.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    border-top: .5pt solid #BFBFBF;
+    border-right: none;
+    border-bottom: .5pt solid #BFBFBF;
+    border-left: .5pt solid #BFBFBF;
+}
+
+.xl95 {
+    mso-style-parent:
+        style0;
+    font-size: 9.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    mso-number-format: Fixed;
+    text-align: right;
+    vertical-align: middle;
+    border: .5pt solid #BFBFBF;
+}
+
+.xl96 {
+    mso-style-parent:
+        style0;
+    font-size: 9.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    mso-number-format: Fixed;
+    vertical-align: middle;
+    border-top: .5pt solid #BFBFBF;
+    border-right: none;
+    border-bottom: .5pt solid #BFBFBF;
+    border-left: none;
+}
+
+.xl97 {
+    mso-style-parent:
+        style0;
+    font-size: 9.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    mso-number-format: Fixed;
+    vertical-align: middle;
+}
+
+.xl98 {
+    mso-style-parent:
+        style0;
+    font-size: 9.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    vertical-align: top;
+    white-space: normal;
+}
+
+.xl99 {
+    mso-style-parent:
+        style0;
+    color: #333F4F;
+    font-size: 18.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.xl100 {
+    mso-style-parent:
+        style0;
+    color: windowtext;
+    font-size: 12.0pt;
+    font-weight: 700;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    mso-number-format: "_-\0022$\0022*
+ \#\,\#\#0\.00_-\;\\-\0022$\0022* \#\,\#\#0\.00_-\;_-\0022$\0022* \0022-\0022??_-\;_-\@";
+ vertical-align:middle;
+    border-top: .5pt solid black;
+    border-right: none;
+    border-bottom: .5pt solid black;
+    border-left: none;
+    background: #D9EAD3;
+    mso-pattern: #D9EAD3 none;
+    padding:
+        10px;
+}
+
+.xl101 {
+    mso-style-parent: style0;
+    color: windowtext;
+    font-size: 9.0pt;
+    font-weight: 700;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    mso-number-format: "_-\0022$\0022*
+ \#\,\#\#0\.00_-\;\\-\0022$\0022* \#\,\#\#0\.00_-\;_-\0022$\0022* \0022-\0022??_-\;_-\@";
+ vertical-align:middle;
+}
+
+.xl102 {
+    mso-style-parent:
+        style0;
+    font-size: 12.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.xl103 {
+    mso-style-parent:
+        style0;
+    color: #333F4F;
+    font-size: 9.0pt;
+    font-style: italic;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.xl104 {
+    mso-style-parent:
+        style0;
+    color: #333F4F;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.xl105 {
+    mso-style-parent:
+        style0;
+    font-size: 12.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: top;
+    border-top: .5pt solid black;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+.xl106 {
+    mso-style-parent:
+        style0;
+    font-size: 12.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl107 {
+    mso-style-parent:
+        style0;
+    font-size: 12.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+}
+
+.xl108 {
+    mso-style-parent:
+        style0;
+    color: #333F4F;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: center;
+}
+
+.xl109 {
+    mso-style-parent:
+        style0;
+    color: white;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl110 {
+    mso-style-parent:
+        style0;
+    color: #333F4F;
+    font-size: 9.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: top;
+    border-top: .5pt solid black;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+.xl111 {
+    mso-style-parent:
+        style0;
+    color: windowtext;
+    border-top: .5pt solid black;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+.rotate {
+    position:
+        absolute;
+    height:
+        auto;
+    bottom:
+        200px;
+    left:
+        -30px;
+    transform:
+        rotate(-90deg);
+    font-size:
+        25px;
+    overflow:
+        hidden;
+    font-family:
+        courier;
+    color:
+        white;
+}
+
+.menu {
+    width:
+        250px;
+    height:
+        100%;
+    position:
+        fixed;
+    background-color:
+        seagreen;
+    -webkit-transition:
+        all 1s;
+    transition:
+        all 1s;
+    right:
+        0;
+    z-index:
+        50;
+    overflow-y:
+        auto;
+    padding-bottom:
+        100px;
+}
+
+.menu.closed {
+    right:
+        -250px;
+}
+
+.menu ul {
+    list-style-type:
+        none;
+    padding:
+        0;
+    margin:
+        85px 0 0 40px;
+    padding-right:
+        40px;
+}
+
+.menu ul li {
+    color:
+        floralwhite;
+    font-size:
+        20px;
+    margin:
+        0 0 5px 0;
+    display:
+        block;
+    height:
+        40px;
+    line-height:
+        40px;
+    padding-left:
+        10px;
+    -webkit-transition:
+        all .3s;
+    transition:
+        all .3s;
+}
+
+.menu ul li:hover {
+    background-color:
+        #3bb16f;
+    cursor:
+        pointer;
+}
+
+#toggle {
+    background-color:
+        rgb(64,
+            142,
+            167);
+    height:
+        100%;
+    min-height:
+        100%;
+    width:
+        50px;
+    position:
+        fixed;
+    top:
+        0;
+    bottom:
+        0;
+    right:
+        0px;
+    z-index:
+        25;
+    -webkit-transition:
+        all .7s ease;
+    transition:
+        all .7s ease;
+}
+
+#toggle:hover {
+    cursor:
+        pointer;
+}
+
+#toggle.closed {
+    right:
+        0px;
+    top:
+        0;
+    bottom:
+        0;
+    right:
+        0;
+    width:
+        100%;
+    height:
+        100%;
+    opacity:
+        .3;
+}
+
+.xl861 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl862 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl863 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl864 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl865 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl866 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl671 {
+    mso-style-parent:
+        style0;
+    color: #4D4E4D;
+    font-size: 20.0pt;
+    font-weight: 700;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    vertical-align: middle;
+}
+
+.xl1051 {
+    mso-style-parent:
+        style0;
+    font-size: 9.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: top;
+    border-top: .5pt solid black;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+.xl981 {
+    mso-style-parent:
+        style0;
+    font-size: 9.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    vertical-align: top;
+    white-space: normal;
+}
+
+.xl1052 {
+    mso-style-parent:
+        style0;
+    font-size: 12.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: top;
+    border-top: .5pt solid black;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+.xl9811 {
+    mso-style-parent:
+        style0;
+    font-size: 9.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    vertical-align: top;
+    white-space: normal;
+}
+
+.xl867 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8661 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl868 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8651 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl869 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8610 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8631 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl811 {
+    mso-style-parent:
+        style0;
+    color: windowtext;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8621 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl812 {
+    mso-style-parent:
+        style0;
+    color: windowtext;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8611 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl761 {
+    mso-style-parent:
+        style0;
+    color: #1F3864;
+    font-size: 9.0pt;
+    font-weight: 700;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    mso-number-format: "m\/d\/yyyy";
+    text-align: center;
+    vertical-align: middle;
+    border-top: none;
+    border-right: none;
+    border-bottom: 0.5pt solid #BFBFBF;
+    border-left: none;
+}
+
+.xl813 {
+    mso-style-parent:
+        style0;
+    color: windowtext;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl86611 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8671 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8612 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl86511 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8681 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8613 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8691 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8614 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl86101 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl86311 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8111 {
+    mso-style-parent:
+        style0;
+    color: windowtext;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8615 {
+    mso-style-parent: style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl86211 {
+    mso-style-parent: style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl814 {
+    mso-style-parent: style0;
+    color: windowtext;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl8121 {
+    mso-style-parent: style0;
+    color: windowtext;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+.xl86111 {
+    mso-style-parent:
+        style0;
+    color: #434343;
+    font-size: 8.0pt;
+    font-family: Roboto;
+    mso-generic-font-family: auto;
+    mso-font-charset: 0;
+    text-align: left;
+    vertical-align: middle;
+    background: #CFE2F3;
+    mso-pattern: #CFE2F3 none;
+}
+
+@media print {
+    @page {
+        transform: scale(1.0);
+        page-break-after: avoid;
+        size: A4;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    html,
+    body {
+        margin: 0px;
+        padding: 0px;
+    }
+}

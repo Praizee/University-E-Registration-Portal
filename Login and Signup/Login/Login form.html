@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- meta tags -->
+    <meta http-equiv="content-language" content="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="website, scholastic, university, e-portal, registration">
+    <meta name="author" content="Stephen Adeniji">
+    <meta name="publisher" content="Stephen Adeniji">
+    <meta name="copyright" content="Stephen Adeniji">
+    <meta name="description" content="This short description describes this website.">
+    <meta name="page-topic" content="E-Registration">
+    <meta name="page-type" content="E-Portal">
+    <meta name="audience" content="Everyone">
+    <meta name="robots" content="index, follow">
+    <!-- end of meta tags -->
+
+    <title>Login</title>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="w3css.css"> -->
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3193/3193101.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="background">
+        <!-- <div class="shape"></div>
+        <div class="shape"></div> -->
+    </div>
+    <form>
+        <a href="../../index.html"><img src="../../pics/cropped-Bells-Logo.2png.png" alt="" width="70px"></a>
+        <h3>Login Here</h3>
+
+        <label for="username" class="label">Matriculation Number</label>
+        <!-- <input type="text" class="text" placeholder="Email or Phone" id="username"> -->
+        <input type="text" pattern="{15}" class="text" placeholder="BUT/012/UG/NSC/012" required id="username">
+        <!-- pattern="[A-Za-z][0-9]{15}" -->
+
+
+        <label for="password" class="label">Password</label>
+        <input type="password" class="text" placeholder="Password" required
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Ex: Student123">
+        <!-- title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters" -->
+        <br>
+        <!-- pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}" -->
+        <div class="remember">
+            <input type="checkbox" class="check" checked> <label for="checkbox">Remember Me</label>
+        </div>
+        <span class="psw"><a href="reset-password.html" style="text-decoration: none;"
+                title="Click here to reset password">Forgot
+                password?</a></span>
+        <button>Log In</button>
+        <!-- <div class="social">
+            <div class="go"><i class="fab fa-google"></i> Google</div>
+            <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
+        </div> -->
+    </form>
+
+</body>
+
+</html>

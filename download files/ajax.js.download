@@ -1,0 +1,348 @@
+// version 2.05
+
+var last_ajax_container = "";
+var pluginxmlHttp = new Array();  // object, inProgress, startPage, lastContent, lastContainer
+
+var silent_form = false;
+function silent_submit(form,onsuccess,url,synch)  {
+  if (silent_form)  silent_form[0].abort();
+  silent_form = new Array();
+  silent_form[0]=new XMLHttpRequest();
+  silent_form[0].onreadystatechange=function() {
+    if(silent_form[0].readyState==4)  {
+       silent_form[1] = silent_form[0].responseText;
+       if (onsuccess) {
+         onsuccess();
+       }
+       if (window.WADFP_jQuery) {
+         WADFP_jQuery.unblockUI();
+       }
+       if (window.WADFP_jQuery) {
+         setTimeout("window.WADFP_jQuery.unblockUI()",800);
+       }
+	}
+  }
+  var getparams = "";
+  var postparams = "";
+  var postmethod = "GET";
+  var formAction = false;
+  var enctype = "";
+  if (form) {
+	getparams = getParamsFromForm(form);
+    if (form.getAttribute("enctype") && form.getAttribute("enctype").toLowerCase() == "multipart/form-data") enctype = "multipart/form-data";
+    if (form.getAttribute("method") && form.getAttribute("method").toLowerCase() == "post")  {
+      postparams = getparams;
+      getparams = "";
+      postmethod = "POST";
+    }
+    formAction = form.getAttribute("action");
+  }
+  if (url) formAction = url;
+  if (!formAction) formAction = document.location.href;
+  silent_form[0].open(postmethod,formAction+((getparams)?(formAction.indexOf("?")>0?"&":"?")+getparams:""),!synch);
+  if (postmethod == "POST") {
+      if (enctype == "multipart/form-data") {
+          postparams = new FormData(form);
+      } else {
+        silent_form[0].setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      }
+  }
+  silent_form[0].send(postparams);
+}
+
+function framework_ajax_plugin(form,plugin,div,framework_folder,append,on_success_start,on_success_end)  {
+  var pluginRef = div;
+  last_ajax_container = div;
+  if (!pluginxmlHttp[pluginRef]) {
+	pluginxmlHttp[pluginRef] = new Array(false,false,0,"","");
+	pluginxmlHttp[pluginRef][0]=new XMLHttpRequest();
+  }
+  pluginxmlHttp[pluginRef][0].abort();
+  pluginxmlHttp[pluginRef][0].onreadystatechange=function() {
+    if(pluginxmlHttp[pluginRef][0].readyState==4)  {
+      document.MM_returnValue = true;
+      pluginxmlHttp[pluginRef][3] = pluginxmlHttp[pluginRef][0].responseText;
+      if (on_success_start) {
+        on_success_start();
+      }
+      pluginxmlHttp[pluginRef][4] = div;
+      if (div) setInner(div,pluginxmlHttp[pluginRef][0].responseText,append);
+      pluginxmlHttp[pluginRef][2][1] = true;
+      pluginxmlHttp[pluginRef][1] = false;
+      if (on_success_end) {
+        on_success_end();
+      }
+      if (window.WADFP_jQuery) {
+        setTimeout("window.WADFP_jQuery.unblockUI()",800);
+      }
+    }
+  }
+  var getparams = "";
+  var postparams = "";
+  var postmethod = "GET";
+  var enctype = "";
+  var field, fieldParams;
+  if (form && Array.isArray(form)) {
+    for(var i=0; i<form.length; i++)  {
+      field = form[i];
+      fieldParams = fieldParam(field);
+      if (fieldParams) getparams += ((getparams==="")?"":"&") + fieldParams;
+    }
+    postmethod = "POST";
+    postparams = getparams;
+    getparams = "";
+  } else if (form && form.tagName.toUpperCase() == "FORM") {
+	getparams = getParamsFromForm(form);
+    if (form.getAttribute("enctype") && form.getAttribute("enctype").toLowerCase() == "multipart/form-data") enctype = "multipart/form-data";
+    if (form.getAttribute("method") && form.getAttribute("method").toLowerCase() == "post")  {
+      postparams = getparams;
+      getparams = "";
+      postmethod = "POST";
+    }
+  } else if (form && form.form) {
+    getparams = fieldParam(form);
+	form = form.form;
+    if (form.getAttribute("enctype") && form.getAttribute("enctype").toLowerCase() == "multipart/form-data") enctype = "multipart/form-data";
+    if (form.getAttribute("method") && form.getAttribute("method").toLowerCase() == "post")  {
+      postparams = getparams;
+      getparams = "";
+      postmethod = "POST";
+    }
+  }
+  var fromPage = document.location.href;
+  if (document.getElementsByTagName('base') && document.getElementsByTagName('base')[0]) {
+      fromPage =  document.getElementsByTagName('base')[0].getAttribute("href");
+  }
+  if (fromPage.indexOf("#") > 0) fromPage = fromPage.substring(0,fromPage.indexOf("#"));
+  fromPage = fromPage.substring(fromPage.indexOf("//")+2);
+  pluginxmlHttp[pluginRef][0].open(postmethod,(framework_folder?framework_folder:"") + "webassist/framework/ajax_wrapper.php?plugin_from="+escape(fromPage)+"&plugin_file="+btoa(escape(plugin)+((getparams)?((plugin.indexOf("?")!=-1)?"&":"?")+getparams:"")),true);
+  if (postmethod == "POST") {
+      if (enctype == "multipart/form-data") {
+          postparams = new FormData(form);
+      } else {
+        pluginxmlHttp[pluginRef][0].setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      }
+  }
+  pluginxmlHttp[pluginRef][1] = true;
+  pluginxmlHttp[pluginRef][0].send(postparams);
+}
+
+function setInner(div,inner,append)  {
+  var insertTo = document.getElementById(div);
+  if (!insertTo) alert(div + " could not be found.  Please use the feedback link to report this error.");
+  if (insertTo.tagName.toLowerCase() == "table")  {
+	if (!append) {
+		while( insertTo.hasChildNodes() ){
+          insertTo.removeChild(insertTo.lastChild);
+		}
+	}
+	addRowsFromString(inner,insertTo);
+  } else  {
+      if (append)  {
+        if(!window.jQuery){ 
+			document.getElementById(div).innerHTML += inner; 
+		} else {
+			$("#"+div).append(inner); 
+		}
+      } else {
+        document.getElementById(div).innerHTML = inner;
+      }
+  }
+}
+
+function addRowsFromString(inner,insertTo,pos)  {
+	var RowStart = inner.match(/<tr[^>]*>/i);
+	var startPos = insertTo.rows.length;
+	if (pos) startPos = pos;
+	while (RowStart)  {
+      inner = inner.substring(inner.indexOf(RowStart[0]));
+      var RowEnd = inner.match(/<\/tr/i);
+      var CurRow = inner.substring(0,inner.indexOf(RowEnd[0]));
+      inner = inner.substring(CurRow.length);
+      addRowFromString(CurRow,insertTo,startPos);
+      startPos++;
+      RowStart = inner.match(/<tr[^>]*>/i);
+	}
+}
+
+function addRowFromString(CurRow,insertTo,pos)  {
+  var RowTag = CurRow.match(/<tr[^>]*>/i);
+  if (RowTag)  {
+	var RowClassName = RowTag[0].match(/ class=['"]([^'"]*)["']/i);
+	var RowStyleName = RowTag[0].match(/ style=["]([^"]*)["]/i);
+	var RowIDName = RowTag[0].match(/ id=["]([^"]*)["]/i);
+	var CellStart = CurRow.match(/<t[hd][^>]*>/i);
+	var NewRow = insertTo.insertRow(pos);
+	var CurCell, CellEnd, NewCell;
+	if (RowClassName) NewRow.setAttribute("class",RowClassName[1]);
+	if (RowStyleName) NewRow.setAttribute("style",RowStyleName[1]);
+	if (RowIDName) NewRow.setAttribute("id",RowIDName[1]);
+	var CellPos = 0;
+	while (CellStart)  {
+      CurRow = CurRow.substring(CurRow.indexOf(CellStart[0]));
+      var CellClassName = CellStart[0].match(/ class=['"]([^'"]*)["']/i);
+      var CellColSpan = CellStart[0].match(/ colspan=['"]([^'"]*)["']/i);
+      var CellStyle = CellStart[0].match(/ style=["]([^"]*)["]/i);
+      var CellWidth = CellStart[0].match(/ width=["]([^"]*)["]/i);
+      var CellAlign = CellStart[0].match(/ align=["]([^"]*)["]/i);
+      CellEnd = CurRow.match(/<\/t[dh]/i);
+      CurCell = CurRow.substring(0,CurRow.indexOf(CellEnd[0]));
+      if (CellStart[0].search(/<th/i) >= 0)  {
+        NewCell = document.createElement("th");
+        NewRow.appendChild(NewCell);
+      } else {
+        NewCell = NewRow.insertCell(CellPos);
+      }
+      CellPos++;
+      if (CellColSpan) NewCell.setAttribute("colspan",CellColSpan[1]);
+      if (CellClassName) NewCell.setAttribute("class",CellClassName[1]);
+      if (CellStyle) NewCell.setAttribute("style",CellStyle[1]);
+      if (CellWidth) NewCell.setAttribute("width",CellWidth[1]);
+      if (CellAlign) NewCell.setAttribute("align",CellAlign[1]);
+      NewCell.innerHTML=CurCell.substring(CurCell.indexOf(">")+1);
+      CurRow = CurRow.substring(CurCell.length);
+      CellStart = CurRow.match(/<t[hd][^>]*>/i);
+	}
+  }
+}
+	
+function getParamsFromForm(form)  {
+  var retval = "";
+  var imageInputs = form.getElementsByTagName("input");
+  var field, fieldParams, fieldName, fieldVal, fieldType, buttonName, buttonAdded;
+  for(var i=0; i<imageInputs.length; i++)  {
+	field = imageInputs[i];
+	fieldName = field.getAttribute("name");
+	fieldVal = "";
+	if (fieldName)  {
+      if (field.tagName.toLowerCase() === "input") {
+        fieldType = "";
+        if (field.getAttribute("type")) { fieldType = field.getAttribute("type").toLowerCase(); }
+        if (fieldType === "image") {
+          fieldName+= "_x=1&" + fieldName +"_y";
+          fieldVal = "1";
+          retval += ((retval==="")?"":"&") + fieldName + "=" + encodeURIComponent(fieldVal);
+        }
+      }
+	}
+  }
+  if (window.progressformbutton && window.progressformbutton.getAttribute("name"))  {
+      buttonName = window.progressformbutton.getAttribute("name");
+  }
+  for(i=0; i<form.elements.length; i++)  {
+	field = form.elements[i];
+    if (field.tagName == "BUTTON") {
+        if (field.getAttribute("type") && field.getAttribute("type").toLowerCase() == "button") continue;
+    }
+    if (buttonName && !buttonAdded) {
+      if (field.getAttribute("name") == buttonName) buttonAdded = true;
+    }
+	fieldParams = fieldParam(field);
+	if (fieldParams) retval += ((retval==="")?"":"&") + fieldParams;
+  }
+  if (buttonName && !buttonAdded)  {
+    retval += ((retval==="")?"":"&") + buttonName + "=" + (window.progressformbutton.getAttribute("value")?window.progressformbutton.getAttribute("value"):"1");
+  }
+  return retval;
+}
+
+function fieldParam(field) {
+  var fieldName = field.getAttribute("name");
+  var fieldVal = "";
+  var fieldType;
+  if (fieldName)  {
+    if (field.tagName.toLowerCase() === "input")  {
+      fieldType = "text";
+      if (field.getAttribute("type")) { fieldType = field.getAttribute("type").toLowerCase(); }
+      if (fieldType === "checkbox" || fieldType === "radio") {
+        if (!field.checked) { return false; }
+        fieldVal = field.value;
+      } else {
+        fieldVal = field.value;
+      }
+    }
+    if (field.tagName.toLowerCase() === "select")  {
+      for (var x=0; x<field.options.length; x++)  {
+        if (field.options[x].selected) {
+          if (fieldVal !== "")  {
+            fieldName += "=" + escape(fieldVal) + "&" + field.getAttribute("name");
+          }
+            fieldVal = field.options[x].value;
+          }
+        }
+      }
+      if (field.tagName.toLowerCase() === "textarea")  {
+        fieldVal = field.value;
+      }
+      return fieldName + "=" + encodeURIComponent(fieldVal);
+	}
+	return false;
+}
+
+function findPos(obj) {
+  var curleft = 0;
+  var curtop = 0;
+  if (obj.offsetParent) {
+    do {
+      curleft += obj.offsetLeft;
+      curtop += obj.offsetTop;
+      obj = obj.offsetParent;
+    } while (obj);
+  }
+  return [curleft,curtop];
+}
+
+function loadNextIfShowing(plugin,plugindiv,relpath,onreturn,oncomplete)  {
+  if (!pluginxmlHttp[plugindiv]) {
+    pluginxmlHttp[plugindiv] = new Array(false,false,0,"","");
+  }
+  if (!pluginxmlHttp[plugindiv][1] && document.getElementById("infinite_processing"))  {
+    pluginxmlHttp[plugindiv][1] = true;
+    var theScroll = window.scrollY;
+    if (!theScroll) theScroll = document.body.parentNode.scrollTop;
+    if (!theScroll) theScroll = document.body.scrollTop;
+    if (!theScroll) theScroll = 0;
+    var pageBottom = theScroll + window.outerHeight;
+    var table = document.getElementById(plugindiv);
+    var tableBottom =  findPos(table)[1] + table.offsetHeight;
+    if (pageBottom >= tableBottom)  {
+      pluginxmlHttp[plugindiv][1] = true;
+      if (!pluginxmlHttp[plugindiv][2]) pluginxmlHttp[plugindiv][2] = new Array(0,true);
+      var theCount = pluginxmlHttp[plugindiv][2][0];
+      var theComplete = pluginxmlHttp[plugindiv][2][1];
+      if (theComplete) {
+        theCount++;
+        pluginxmlHttp[plugindiv][2] = new Array(theCount,false);
+      }
+      framework_ajax_plugin(false,plugin+theCount,plugindiv,relpath,true,onreturn,oncomplete);
+    } else {
+      pluginxmlHttp[plugindiv][1] = false;  
+    }
+  }
+}
+
+function removeElementById(elementId,div) {
+  var element = document.getElementById(elementId);
+  if (!element) return;
+  element.parentNode.removeChild(element);
+  if (window.pluginxmlHttp && pluginxmlHttp[div]) pluginxmlHttp[div][1] = false;
+}
+
+function wa_addEvent(element, evnt, funct){
+  if (element.attachEvent)
+   return element.attachEvent('on'+evnt, funct);
+  else
+   return element.addEventListener(evnt, funct, false);
+}
+
+function wa_removeEvent(element, evnt, funct){
+  if (element.detachEvent)
+   return element.detachEvent('on'+evnt, funct);
+  else
+   return element.removeEventListener(evnt, funct, false);
+}
+
+function wa_removeElementById(elementId,div) {
+  var element = document.getElementById(elementId);
+  element.parentNode.removeChild(element);
+}

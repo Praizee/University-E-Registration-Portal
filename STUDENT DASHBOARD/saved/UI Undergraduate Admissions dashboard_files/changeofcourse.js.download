@@ -1,0 +1,269 @@
+myApp.controller("changeofcourseCtrl", function($scope, $timeout, $rootScope, $http, $location, $modal, $routeParams, Data, $localStorage)
+{
+    $rootScope.content_loaded = false;
+	$scope.bio_data = $localStorage.bio_data;
+	//alert(JSCON.stringify($scope.bio_data))
+	//$aggr = ($scope.bio_data.jambScore/8)+ ($scope.bio_data.score/2);
+	//alert("Your Aggregate score is = "+$aggr);
+	//alert($scope.bio_data.completionStatus);
+	
+	$scope.jambRegNo = $scope.bio_data.jambRegNo;
+	
+$scope.showPrint =true;
+$scope.admissionOfficer = "Mrs Afolabi ...";
+
+
+$scope.applicantJambNo = {"jambNumber": $localStorage.bio_data.jambRegNo};
+
+//alert($scope.applicantJambNo.jambNumber);
+$scope.greetings = "Dear";
+$scope.printReport = false;
+$scope.printingIsready = false;
+$scope.dataIsNotReady = false;
+
+// initialisation of faculties selction boxes
+$scope.faculty = {"first":"[ Select Faculty ]"};
+
+// initialisation of faculties selction boxes
+$scope.department = {"first":"[ Select Department ]"};
+
+				 
+// initialization of the show and hide states of the selection boxes
+$scope.firstFacultySelected = false;
+$scope.firstDepartmentSelected = false;
+
+// on change events handlers
+$scope.firstFacultyChange = function()
+{
+	$scope.dataIsNotReady = true;
+
+	if($scope.faculty.first =="[ Select Faculty ]")
+	{
+		
+	}
+	else
+	{
+	$scope.firstFacultySelected = true;
+	$scope.theFaculty = {"faculty":$scope.faculty.first};	
+
+	$http.post("backend/sqlprocesses.php?getDepartment1=yes", $scope.theFaculty)
+		.success(function(response){
+			//alert(JSON.stringify(response));
+			if(response.status == "ok")
+			{
+				$scope.dataIsNotReady = false;
+
+				//response.data.push("[ Select Department ]");
+				$scope.department = {"first":"[ Select Department ]"};
+
+				$scope.departments1 = response.data;
+			}
+			else if(response.status == "not ok")	
+			{
+				items = "Unable to retrieve department";
+				modalMessage(items);
+			}
+			else
+			{
+			
+			}
+		})
+		.error(function(errorMessage){
+		});	
+
+	}
+	
+}
+
+
+
+
+
+$scope.firstDepartmentChange = function()
+{
+	
+	if($scope.department.first =="[ Select Department ]")
+	{
+		
+	}
+	else
+	{
+	$scope.firstDepartmentSelected = true;
+	
+	}
+	
+}
+
+
+
+// end of on change event handlers
+
+
+$http.post("backend/sqlprocesses.php?getCourses1=yes")
+		.success(function(response){
+			//alert(JSON.stringify(response));
+			if(response.status == "ok")
+			{
+			
+			$rootScope.content_loaded = true;
+				$scope.faculties1 = response.data;
+				$scope.photo = $scope.applicant.jambRegNo + ".jpg";
+
+			}
+			else if(response.status == "not ok")	
+			{
+				items = "Unable to retrieve applicant";
+				modalMessage(items);
+			
+			$rootScope.content_loaded = true;
+			}
+			else
+			{
+			
+			$rootScope.content_loaded = true;
+			
+			}
+			
+			$rootScope.content_loaded = true;
+		})
+		.error(function(errorMessage){
+		    $rootScope.content_loaded = true;
+		});	
+	
+$scope.printDiv = function(divName)
+{
+	$scope.showPrint = false;
+	printIt(divName);
+	
+}
+
+// submission of change of course data
+/*$scope.faculty = {"first":"[ Select First Faculty ]",
+				 "second":"[ Select Second Faculty ]"};
+
+// initialisation of faculties selction boxes
+$scope.department = {"first":"[ Select First Department ]",
+				 		"second":"[ Select Second Department ]"};*/
+$scope.submitData = function ()
+{ 
+	if($scope.faculty.first == "[ Select Faculty ]" || $scope.department.first == "[ Select Department ]" )
+	{
+		items = "Complete your selections before submission";
+		modalMessage(items)
+		
+	
+	} 
+	else 
+	{
+		$scope.submissionData = {"jambNumber":$scope.applicantJambNo.jambNumber,
+							"faculty1":$scope.faculty.first,
+							"department1":$scope.department.first,
+							};
+		$http.post("backend/sqlprocesses.php?submitChangeOfCourse=yes", $scope.submissionData)
+		.success(function(response){
+			//alert(JSON.stringify(response));
+			if(response.status == "ok")
+			{
+				items = response.message;
+				modalMessage(items);
+				$scope.photo = $scope.applicantJambNo.jambNumber + ".jpg"
+				$scope.printReport = true;
+				
+
+			}
+			else if(response.status == "not ok")	
+			{
+				items = response.message;
+				modalMessage(items);
+			}
+			else
+			{
+				items = response.message;
+				modalMessage(items);
+			}
+		})
+		.error(function(errorMessage){
+				items = response.message + " " + errorMessage;
+				modalMessage(items);
+		});	
+	
+
+		
+	
+	}
+	
+	
+}
+// end of submission
+function printIt(divName) {
+
+    printContents = document.getElementById(divName).innerHTML;
+	//alert(printContents);
+     var originalContents = document.body.innerHTML;
+     document.body.innerHTML = printContents;
+
+     window.print();
+     document.body.innerHTML = originalContents;
+}
+
+
+function modalMessage(items)
+{
+	
+		  var modalInstance = $modal.open(
+		  {
+			templateUrl: 'partials/alertok.html',
+			controller: 'alertCtrl',
+			keyboard : false,
+			size:"sm",
+			resolve: {
+					  items: function () {
+						return items;
+					  }
+			}
+			
+		  });
+	
+	}	
+function indexOfAnElement(theArray, searchElement)
+{
+
+	n = theArray.length;
+	for(i=0; i<=n-1; i++)
+	{
+		theElement = theArray[i];
+		if(theElement.courseTitle===searchElement)
+		{
+			return i;
+		}
+	}
+	
+	}
+	
+function flashMessage(mess)
+{
+	$scope.messages = mess;
+	  $timeout(function(){
+	  $scope.messages = "";
+	  },2000);
+}
+
+$scope.printDiv = function(divName)
+{
+	$scope.printingIsready = true;
+	printIt(divName);
+	
+}
+
+
+function printIt(divName) {
+
+    printContents = document.getElementById(divName).innerHTML;
+	//alert(printContents);
+     var originalContents = document.body.innerHTML;
+     document.body.innerHTML = printContents;
+
+     window.print();
+     document.body.innerHTML = originalContents;
+}
+});

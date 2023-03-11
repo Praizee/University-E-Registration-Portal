@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://admissions.ui.edu.ng/#/guidelines -->
+<html ng-app="myApp" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style>
+
+<title>UI Undergraduate Admissions</title>
+<script src="./UI Undergraduate Admissions g_files/angular.min.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/jquery-1.11.2.min.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/angular-route.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/bootstrap.min.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/ui-bootstrap-tpls-0.10.0.min.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/angular-messages.min.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/angular-animate.min.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/twitter-bootstrap-hover-dropdown.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/toaster.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/angular-sanitize.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/ngStorage.min.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/angular-spinkit.min.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/main.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/data.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/authentication.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/applicant.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/admin.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/n-biodata-utme.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/biodata.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/n-biodata-de.js.download"></script>
+
+<script src="./UI Undergraduate Admissions g_files/biodatade.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/postutmeresult.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/cutoff.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/changeofcourse.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/invitation.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/index.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/validation.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/body.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/settingcontroller.js.download"></script>
+<script src="./UI Undergraduate Admissions g_files/alerts.js.download"></script>
+
+<link href="https://admissions.ui.edu.ng/css/animate1.css">
+<link rel="stylesheet" href="./UI Undergraduate Admissions g_files/bootstrap.css">
+<link rel="stylesheet" href="./UI Undergraduate Admissions g_files/ecss.css">
+<link rel="stylesheet" href="./UI Undergraduate Admissions g_files/pgry.css">
+<link rel="stylesheet" href="./UI Undergraduate Admissions g_files/font-awesome.css">
+<link rel="stylesheet" href="./UI Undergraduate Admissions g_files/m-styles.min.css">
+<link rel="stylesheet" href="./UI Undergraduate Admissions g_files/home_sty.css">
+<link rel="stylesheet" href="./UI Undergraduate Admissions g_files/form_sty.css">
+<link rel="stylesheet" href="./UI Undergraduate Admissions g_files/toaster.css">
+<link rel="stylesheet" href="./UI Undergraduate Admissions g_files/angular-spinkit.min.css">
+<link rel="stylesheet" href="./UI Undergraduate Admissions g_files/animate.css">
+
+</head>
+<body ng-controller="bodyCtrl" class="ng-scope">
+<div class="navbar navbar-fixed-top navbar-inverse">
+    <div id="nav-cnt">
+    	<div class="top_left pull-left">
+        	<!-- ngIf: !isMain --><div class="brand ng-scope" ng-if="!isMain">
+            	<img src="./UI Undergraduate Admissions g_files/top_logo.png">
+            </div><!-- end ngIf: !isMain -->
+            
+            <ul class="nav navbar-nav">
+            	<!-- ngRepeat: menu_content in menu_contents --><li class="dropdown ng-scope" ng-repeat="menu_content in menu_contents">
+                  <!-- ngIf: menu_content.hasSubMenu -->
+                  
+                   <!-- ngIf: menu_content.hasSubMenu -->
+                  <!-- ngIf: !menu_content.hasSubMenu --><a href="https://admissions.ui.edu.ng/#/" class="dropdown-ntoggle ng-scope home" ng-class="{&#39;home&#39; : menu_content.isHome, &#39;active&#39;:menu_content.isActive}" role="button" aria-expanded="false" ng-if="!menu_content.hasSubMenu">
+                  	  <!-- ngIf: menu_content.isBigger --><i ng-if="menu_content.isBigger" class="icon-home icn2 nav_icn" ng-show="menu_content.logo"></i><!-- end ngIf: menu_content.isBigger -->
+                      <!-- ngIf: !menu_content.isBigger --> 
+                      <span ng-bind="menu_content.name" class="ng-binding">Home</span>
+                  </a><!-- end ngIf: !menu_content.hasSubMenu -->
+                  
+                </li><!-- end ngRepeat: menu_content in menu_contents --><li class="dropdown ng-scope" ng-repeat="menu_content in menu_contents">
+                  <!-- ngIf: menu_content.hasSubMenu -->
+                  
+                   <!-- ngIf: menu_content.hasSubMenu -->
+                  <!-- ngIf: !menu_content.hasSubMenu --><a href="https://admissions.ui.edu.ng/#/guidelines" class="dropdown-ntoggle ng-scope active" ng-class="{&#39;home&#39; : menu_content.isHome, &#39;active&#39;:menu_content.isActive}" role="button" aria-expanded="false" ng-if="!menu_content.hasSubMenu">
+                  	  <!-- ngIf: menu_content.isBigger -->
+                      <!-- ngIf: !menu_content.isBigger --><i ng-if="!menu_content.isBigger" class="icon-file icn nav_icn" ng-show="menu_content.logo"></i><!-- end ngIf: !menu_content.isBigger --> 
+                      <span ng-bind="menu_content.name" class="ng-binding">Guidelines</span>
+                  </a><!-- end ngIf: !menu_content.hasSubMenu -->
+                  
+                </li><!-- end ngRepeat: menu_content in menu_contents --><li class="dropdown ng-scope" ng-repeat="menu_content in menu_contents">
+                  <!-- ngIf: menu_content.hasSubMenu -->
+                  
+                   <!-- ngIf: menu_content.hasSubMenu -->
+                  <!-- ngIf: !menu_content.hasSubMenu --><a href="https://admissions.ui.edu.ng/#/contact-details" class="dropdown-ntoggle ng-scope" ng-class="{&#39;home&#39; : menu_content.isHome, &#39;active&#39;:menu_content.isActive}" role="button" aria-expanded="false" ng-if="!menu_content.hasSubMenu">
+                  	  <!-- ngIf: menu_content.isBigger -->
+                      <!-- ngIf: !menu_content.isBigger --><i ng-if="!menu_content.isBigger" class="icon-envelope icn nav_icn" ng-show="menu_content.logo"></i><!-- end ngIf: !menu_content.isBigger --> 
+                      <span ng-bind="menu_content.name" class="ng-binding">Contact Us</span>
+                  </a><!-- end ngIf: !menu_content.hasSubMenu -->
+                  
+                </li><!-- end ngRepeat: menu_content in menu_contents -->
+            </ul>
+        </div>
+    	<!-- ngIf: !isMain --><div class="top_right pull-right ng-scope" ng-if="!isMain">
+        	<!--<button class="m-btn red" ng-click = "login();" ng-if="!authenticated">&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;</button>-->
+        	<!-- ngIf: !authenticated --><a href="https://admissions.ui.edu.ng/#/" class="m-btn red ng-scope" ng-if="!authenticated">&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;</a><!-- end ngIf: !authenticated -->
+        	<!-- ngIf: authenticated -->
+        </div><!-- end ngIf: !isMain -->
+    </div>
+</div>
+
+<div ng-show="!content_loaded" class="ng-hide">
+	<div style="margin:auto; margin-top:0; margin-bottom:0px; min-height:600px; width:100%;">
+    	<div id="hme_cnt_dv" class="tp_cnt_dv" style="margin:auto; margin-top:0; margin-bottom:0px; padding-top:150px; min-height:600px; width:100%;">
+    	    <h4 style=" text-align:center">Waiting for the server. please wait</h4>
+    		<wave-spinner><div class="wave-spinner">
+  <div class="rect1"></div>
+  <div class="rect2"></div>
+  <div class="rect3"></div>
+  <div class="rect4"></div>
+  <div class="rect5"></div>
+</div>
+</wave-spinner>
+		</div>
+	</div>
+</div>
+
+<div ng-show="content_loaded" class="content-layer container">
+    <!-- ngView:  --><div ng-view="" class="ng-scope"><div style="margin:auto; margin-top:0; margin-bottom:0px; min-height:500px; width:100%;" class="ng-scope">
+    <div id="hme_cnt_dv" class="tp_cnt_dv">
+        <div class="hd">
+            Admission Guidelines
+        </div>
+        
+        <div class="cnt_vl" style="margin-top:20px; font-size:14px;">
+            
+            <div id="mainp_quote" style="">
+                <ul class="side_mnu_cnt" style="">
+                    <li class="side_mnu active_mnu" ng-class="{active_mnu:login_info}"><a href="https://admissions.ui.edu.ng/" ng-click="openLoginInfoDv()">Signing into the portal</a></li>
+                    <li class="side_mnu" ng-class="{active_mnu:biodata_info}"><a href="https://admissions.ui.edu.ng/" ng-click="openBioDataInfoDv()">Filling the Bio Data Form</a></li>
+                    <li class="side_mnu" ng-class="{active_mnu:sample_questions_info}"><a href="https://admissions.ui.edu.ng/" ng-click="openSampleQuestionsInfoDv()">Downloading Sample Questions</a></li>
+                </ul>
+            </div>
+            
+        	<div id="mainp_note" style="">
+            	<div ng-show="login_info">
+                	<h4>Signing into the portal</h4>
+                    <div class="m-body" style="width:100%; float:left;">
+                        <p>Your Username is your Jamb Registration Number eg <span style="color:#00F">44444444UI</span></p>
+                        <p>Your Password is your <strong style="color:#F00; font-size:16px;text-decoration:underline">Surname </strong> at first login e.g <span style="color:#00F">Adelopo</span>
+                        </p>
+                        <p>If you forgot your password, click the reset password link to reset the password</p>
+                        <p>At first login, the system prompts you to change your password. The minimum length of your password is 6 characters</p>
+                        <p>Keep your SECRET QUESTION; for it is used to reset your password to your SURNAME (in capital lettrs) in case you cannot remember it</p>
+                        
+                        
+                    </div>
+                </div>
+                
+            	<div ng-show="biodata_info" class="ng-hide">
+                	<h4>Filling the Bio Data Form</h4>
+                    <div class="m-body" style="width:100%; float:left;">
+                    	<strong>There are seven sub-menus. Sub menu number one has been completed by JAMB. You are required to fill the following:</strong>
+                    	<ul>
+                    	    
+                    	    <li>Personal Information</li>
+                    	    <li>Next of Kin Information</li>
+                    	    
+                    	    <li>O'Level Result(s) for DE only</li>
+                    	    <li>Post Secondary Result for DE only</li>
+                    	    <li>Fall Back Institution(s)</li>
+                    	    <li>Attestation</li>
+                    	    
+                    	</ul>
+                    	<p><b>NOTE: </b> Do not use apostrophe(') in your data. It can give you unnecessry stress when filling the forms</p>
+                    </div>
+                </div>
+                
+            	<div ng-show="sample_questions_info" class="ng-hide">
+                	<h4>Downloading Sample Questions</h4>
+                    <div class="m-body" style="width:100%; float:left;">
+                    	<p>You can download questions for up to 4 subjects</p>
+                    	<p>Once you download a question on a subject, the subject will be locked down as one of your 4 subjects</p>
+                    	<p>Once you have downloaded sample questions from 4 subjects you will not be able to download sample questions from any other subject</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script type="text/ng-template" id="myModalContent.html" class="ng-scope">
+        <div class="modal-header">
+            <h3 class="modal-title">{{modalHeader}}</h3>
+        </div>
+        <div class="modal-body">
+            <span ng-bind-html="modalDisplay"></span>
+        </div>
+        <div class="modal-footer">
+            <button class="m-btn blue" ng-click="ok()">OK</button>
+        </div>
+    </script>
+
+<script type="text/ng-template" id="dialogContent.html" class="ng-scope">
+        <div class="modal-header">
+            <h3 class="modal-title">{{modalHeader}}</h3>
+        </div>
+        <div class="modal-body">
+            <span ng-bind-html="modalDisplay"></span>
+        </div>
+        <div class="modal-footer">
+            <button class="m-btn" ng-click="cancel()">Cancel</button>
+            <button class="m-btn blue" ng-click="ok(form_values)" style="margin-right:20px;">OK</button>
+        </div>
+    </script></div>
+</div>
+
+<div id="footer" class="navbar navbar-default fixed-bottom  " style="margin-top:20px;">
+    <div id="foot-cnt" class="container">
+    	<!-- ngIf: isMain -->
+    	<!-- ngIf: !isMain --><div class="navbar-text pull-right brand ng-scope" ng-if="!isMain"><img src="./UI Undergraduate Admissions g_files/bottom_logo.png"></div><!-- end ngIf: !isMain -->
+    </div>
+</div>
+
+<script>
+	function printDiv(divName) {
+		 var printContents = document.getElementById(divName).innerHTML;
+		 var originalContents = document.body.innerHTML;
+		 document.body.innerHTML = printContents;
+		 window.print();
+		 document.body.innerHTML = originalContents;
+	}
+</script>
+
+
+
+</body></html>

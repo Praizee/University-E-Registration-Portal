@@ -1,0 +1,649 @@
+myApp.controller("biodataCtrl", function($scope, $timeout, $rootScope, $http, $location, $modal, $routeParams, $localStorage){
+    
+	bio_data = $localStorage.bio_data;
+	if(bio_data.portal_payment_status == "unpaid" || bio_data.screening_payment_status == "unpaid"){
+	    $location.path("applicant/applicant-dashboard/");
+	}
+	
+	// initialisation of some variables
+	$scope.subjectAndGrade =[];
+	$scope.olevelSubjects = [];
+	$scope.uploadProfileImaage = false;
+	$scope.doubleClickedP = false;
+	$scope.doubleClickedS = false;
+	$scope.subjectCounter = 0;
+	$scope.olevelSelected = false;
+	$scope.subject = "[ Select Subjects ]";
+	$scope.grade = "[ Select Grades ]";
+	$scope.singleOrMore = "subject";
+	$scope.isSelected = false;
+	$scope.uploadSignature = false;
+	$scope.nextOfKinTime=false;
+	$scope.photoTime=false;
+	$scope.olevelTime=false;
+	$scope.biodata2Time=true;
+	$scope.questionTime=false;
+	$scope.sitting = "- First Sitting";
+	$scope.sittingNumber = 1;
+	$scope.isSavedBiodata = false;
+	$scope.isSavedNextOfKin= false;
+	$scope.isSavedPassport= false;
+	$scope.isSavedSignature= false;
+	$scope.messages = "";
+
+	
+	//alert($routeParams['jambNo']);
+	$scope.maritalStatus = ["Single","Married","Widow","Widower","Single Parent","Divorcee"];
+	$scope.applicantJambNo = {"jambNumber": $routeParams['jambNo']};
+	//alert(JSON.stringify($scope.applicantJambNo));
+
+	
+	
+	$scope.applicant1 = {"jambNumber":$scope.applicantJambNo.jambNumber,
+						"gender":"[ Select Gender ]",
+						 "maritalStatus":"[ Select Marital Status ]",
+						 "dateOfBirth":"",
+						 "nationality":"Nigerian",
+						 "permanentHomeAddress":"",
+						 "email":"",
+						 "phoneNumber":"",
+						 "deformity":"",
+						 "deformityTpe":"",
+						 "demformity_device":"",
+						 "nextOfKinName":"",
+						 "nextOfKinAddress":"",
+						 "nextOfKinEmail":"", 
+						 "nextOfKinPhoneNumber":""
+						};
+
+
+// begining of navaigation buttons
+$scope.next = function()
+{
+	if($scope.isSavedBiodata===false)
+	{
+		items = "You have not saved this page";
+		modalMessage(items);
+		
+	}
+	else
+	{
+	$scope.biodata2Time=false;
+	$scope.nextOfKinTime=true;
+	}
+}
+
+$scope.toBiodata = function()
+{
+	$scope.nextOfKinTime=false;
+	$scope.biodata2Time=true;
+}
+
+$scope.fromNextOfKin = function()
+{
+	if($scope.isSavedNextOfKin===false)
+	{
+		items = "You have not saved this Next of Kin page";
+		modalMessage(items)
+		
+	}
+	else
+	{
+	$scope.nextOfKinTime=false;
+	$scope.photoTime=true;
+	}
+	
+}
+
+$scope.toNextOfKin = function()
+{
+	$scope.photoTime=false;
+	$scope.nextOfKinTime=true;
+
+}
+
+
+$scope.toOlevel = function()
+{
+	if($scope.isSavedPassport==false)
+	{
+		items = "You have not uploaded your photos";
+		modalMessage(items)
+		
+	}
+	else if($scope.isSavedSignature==false)
+	{
+		items = "You have not uploaded your signature";
+		modalMessage(items)
+	}
+	else
+	{
+	$scope.photoTime=false;
+	$scope.olevelTime=true;
+	}
+	
+	
+
+}
+
+
+$scope.toPhoto = function()
+{
+	$scope.photoTime=true;
+	$scope.olevelTime=false;
+
+}
+
+
+
+$scope.saveData = function()
+{
+
+if($scope.applicant1.maritalStatus == "[ Select Marital Status ]" || $scope.applicant1.dateOfBirth == "" || $scope.applicant1.permanentHomeAddress == "" || $scope.applicant1.email == "" || $scope.applicant1.gender == "[ Select Gender ]" || $scope.applicant1.phoneNumber == "")
+{
+	items = "All the fields stared are compulsory, fill them and save";
+	modalMessage(items);
+	
+}
+else
+{
+		$http.post("backend/sqlprocesses.php?savePart2=yes", $scope.applicant1)
+		.success(function(response1){
+			if(response1.status == "ok")
+			{
+				$scope.isSavedBiodata = true;
+				flashMessage("Your information was saved successfully");
+
+			}
+			else if(response1.status == "not ok")	
+			{
+				flashMessage("Your information was not saved successfully");
+			}
+			else
+			{
+			
+			}
+		})
+		.error(function(errorMessage){
+})}
+}
+
+
+$scope.saveNextOfKinData = function()
+{
+
+if($scope.applicant1.nextOfKinName == "" || $scope.applicant1.nextOfKinAddress == "" || $scope.applicant1.nextOfKinEmail == "" || $scope.applicant1.nextOfKinPhoneNumber == "")
+{
+	items = "All the fields starred are compulsory, fill them and save";
+	modalMessage(items);
+	
+}
+else
+{
+		$http.post("backend/sqlprocesses.php?saveNextOfKin=yes", $scope.applicant1)
+		.success(function(response1){
+			if(response1.status == "ok")
+			{
+				$scope.isSavedNextOfKin= true;
+				flashMessage("Your information was saved successfully");
+			}
+			else if(response1.status == "not ok")	
+			{
+				flashMessage("Your information was not saved successfully");
+			}
+			else
+			{
+			
+			}
+		})
+		.error(function(errorMessage){
+})}
+}
+
+$scope.saveOlevelSubjects = function()
+{
+	if($scope.examination.year == "[ Select Examination Year ]" || $scope.examination.type == "[ Select Examination Type ]" || $scope.examination.month == "[ Select Examination Month ]" || $scope.examination.center == "" || $scope.examination.number == "")
+{
+	items = "All the fields stared are compulsory, fill them and save";
+	modalMessage(items);
+	
+}
+else
+{
+		sentItems = {"subjectsAndGrades":$scope.subjectAndGrade, "examData": $scope.examination};
+		$http.post("backend/sqlprocesses.php?saveSubjects=yes", sentItems)
+		.success(function(response1)
+		{
+			if(response1.status == "ok")
+			{
+				
+				   items = "Your information was saved successfully";
+				   modalMessage(items)
+				/// work on this part
+	
+					if($scope.sitting == "- Second Sitting")
+					{
+						items = "You have successfully completed the forms";
+						modalMessage(items)
+					}
+					else
+					{
+						$scope.questionTime= true;
+						$scope.olevelTime=false;
+					}
+			}
+			else if(response1.status == "not ok")	
+			{
+				items = "Your information was not saved successfully";
+				modalMessage(items);
+			}
+			else
+			{
+				items = "System Error, Please check your entries";
+				modalMessage(items)
+			}
+		}) //end of success' call back
+		.error(function(errorMessage){
+			flashMessage();
+			items = "System Error, Please check your entries";
+			modalMessage(items)
+		}) // end of error call back
+}
+};
+
+// save operations ends here
+
+
+
+
+
+
+// end of navigation buttons	
+$scope.yes = function()
+{
+
+	$scope.sitting = "- Second Sitting";
+	$scope.sittingNumber = 2;
+	$scope.subjectCounter = 0;
+	$scope.subjectAndGrade =[];
+	$scope.olevelSubjects = [];
+	$scope.examination = {"jambNumber": $scope.applicantJambNo.jambNumber,
+						  "sitting": $scope.sittingNumber,
+						  "year":"[ Select Examination Year ]",
+						  "type":"[ Select Examination Type ]",
+						  "month":"[ Select Examination Month ]",
+						  "center":"",
+						  "number":""};	
+	$scope.olevelSubjects = angular.copy($scope.olevelSubjectsCopy);
+	$scope.questionTime= false;
+	$scope.olevelTime=true;
+
+}
+
+$scope.no = function()
+{
+$scope.olevelTime=false;
+$scope.questionTime= false;
+
+items = "You have successfully completed this session";
+modalMessage(items);
+
+	
+
+}
+
+
+// response to questions
+
+
+// end of response to questions
+
+/* beginning of date stuff */
+  $scope.clear = function () {
+    $scope.applicanat1.dateOfBirth = null;
+  };
+
+
+  $scope.toggleMin = function() {
+    $scope.minDate = $scope.minDate ? null : new Date();
+  };
+  $scope.toggleMin();
+
+  $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yyyy',
+    startingDay: 1
+  };
+
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate', 'yyyy-MM-dd' ];
+  $scope.format = $scope.formats[4];
+
+
+/*
+end of date stuff
+*/
+
+
+	
+	// addition of subject handler
+	$scope.addSelected = function()
+	{
+	   if($scope.subjectCounter >= 9)
+	   {
+		items = "You cannot pick more than 9 subjects";
+	   	modalMessage(items);
+	   }
+	   else
+	   {
+		if($scope.subject=="[ Select Subjects ]")
+			{
+				$scope.message ="Pick a Subject";
+				items = $scope.message;
+				modalMessage(items);
+			}
+			else if($scope.grade=="[ Select Grades ]")
+			{
+				items = "Pick a Grade for the subject";
+				modalMessage(items);
+			}else
+			{
+				$scope.subjectAndGrade.push({"subj":$scope.subject, "grade":$scope.grade});
+				indexofElement = indexOfAnElement($scope.olevelSubjects, $scope.subject)
+				$scope.subjectCounter += 1;
+				if($scope.subjectCounter > 1) $scope.singleOrMore = "subjects";
+				$scope.olevelSubjects.splice(indexofElement,1)
+				$scope.subject = "[ Select Subjects ]"
+				$scope.grade = "[ Select Grades ]"
+				$scope.olevelSelected = false;
+				
+				}
+		
+		}
+	}
+		
+	$scope.changedSubject = function()
+	{
+		if($scope.subject!= "[ Select Subjects ]")	$scope.olevelSelected = true;
+			
+		
+	}
+	
+	// months in the year
+	$scope.months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+	$scope.years = [];
+	today = new Date();
+	thisYear = today.getFullYear();
+	for (i=1990; i<= thisYear; i++)
+	{ $scope.years.push(i);
+		}
+	
+	$scope.examination = {"jambNumber": $scope.applicantJambNo.jambNumber,
+							"sitting":$scope.sittingNumber,
+							"year":"[ Select Examination Year ]",
+							"type":"[ Select Examination Type ]",
+							"month":"[ Select Examination Month ]",
+							"center":"",
+							"number":""};	
+
+	$scope.examinationType = ["WAEC", "NECO", "NABTECH", "GCE"];
+	
+	$scope.deleteSubject = function(theIndex)
+	{
+		$scope.olevelSubjects.push({"courseCode":$scope.subjectAndGrade[theIndex].subj,"courseTitle":$scope.subjectAndGrade[theIndex].subj})
+		$scope.olevelSubjects.sort();
+		$scope.subjectAndGrade.splice(theIndex,1)
+		$scope.subjectCounter -= 1;
+		if($scope.subjectCounter < 2) $scope.singleOrMore = "subject";
+
+		
+	}
+	$scope.grades = ["Awaiting Result","A1", "B2", "B3", "C4", "C5", "C6", "P7", "P8", "F9"];
+	$scope.applicantPhoto = $scope.applicantJambNo.jambNumber + ".jpg";
+	$scope.applicantSignature = $scope.applicantJambNo.jambNumber + ".jpg";
+	
+	// show profile picture upload
+	$scope.uploadProfilePicture = function()
+		{
+			$scope.uploadProfileImaage = true;
+			}
+
+	
+	//get applicant information
+	$http.post("backend/sqlprocesses.php?getApplicant=yes", $scope.applicantJambNo)
+		.success(function(response){
+			if(response.status == "ok")
+			{
+				$scope.applicant = response.data;
+			}
+			else if(response.status == "not ok")	
+			{
+				$scope.message = "Unable to retrieve applicant";
+				var modalInstance = $modal.open(
+					{
+					 templateUrl: 'partials/alerts.html',
+					  controller: 'alertCtrl',
+					  keyboard : false,
+					  size:"sm",
+					  resolve: {
+								items: function () {
+								  return items;
+								}
+					  }
+					  
+					});
+			}
+			else
+			{
+			
+			}
+		})
+		.error(function(errorMessage){
+			
+		});
+		
+	//get nationality
+	$http.post("backend/sqlprocesses.php?getNationality=yes")
+		.success(function(response){
+			if(response.status == "ok")
+			{
+				$scope.nationality = response.data;
+			}
+			else if(response.status == "not ok")	
+			{
+				items = "Unable to retrieve nationality";
+				modalMessage(items);
+				
+			}
+			else
+			{
+			
+			}
+		})
+		.error(function(errorMessage){
+			
+		})
+
+		
+		$http.post("backend/sqlprocesses.php?getOlevel=yes")
+		.success(function(response1){
+			if(response1.status == "ok")
+			{
+				$scope.olevelSubjects = response1.data;
+				$scope.olevelSubjectsCopy = angular.copy($scope.olevelSubjects);
+			}
+			else if(response1.status == "not ok")	
+			{
+				var modalInstance = $modal.open(
+					{
+					  templateUrl: 'partials/login.html',
+					  controller: 'validationCtrl',
+					  keyboard : false
+					  
+					});
+			}
+			else
+			{
+			
+			}
+		})
+		.error(function(errorMessage){
+			
+		})
+		
+		
+	
+// implementation of profile picture
+		$scope.uploadProfilePicture1 = function(files) {
+				var fd1 = new FormData();
+				//alert($scope.theIndex);
+				console.log(fd1);
+					//Take the first selected file
+					fd1.append("file", files[0]);
+					var profilePictureFilename = $scope.applicantJambNo.jambNumber;
+					fd1.append("name", profilePictureFilename);
+					$scope.fd1 = fd1;
+					$scope.isSelected = true;
+
+		
+				};
+		
+		$scope.uploadProfilePictureExt = function() {
+			if( $scope.fd1===undefined)
+			{
+				items ="File has not been selected";
+				modalMessage(items)
+			}
+			else
+			{
+
+			
+    		$http.post("backend/profilepicture.php?what=passport", $scope.fd1, {withCredentials: true, headers: {'Content-Type': undefined },transformRequest: angular.identity })
+			.success(function(data){
+				// put whatever you want here
+				$scope.applicantPhoto = $scope.applicantPhoto + '?' + new Date().getTime();
+				$scope.uploadProfileImaage = false;
+				$scope.isSavedPassport=true;
+				items ="Passport has been uploaded successfully";
+				modalMessage(items)
+
+				})
+			.error(function(errMes){
+				items ="Passport was not uploaded successfully" + "There was " + errMes + " error" ;
+				modalMessage(items);
+				
+				});
+			}
+		};
+		
+		
+// end of implementation of profile picture
+
+$scope.cancelProfileFileUpload = function()
+		{
+			$scope.uploadProfileImaage = false;
+			}
+	
+	
+
+
+	
+// implementation of signature upload
+$scope.uploadSignatureHandler1 = function(files) {
+				var fd2 = new FormData();
+					fd2.append("file", files[0]);
+					var signatureFilename = $scope.applicantJambNo.jambNumber;
+					fd2.append("name", signatureFilename);
+					$scope.fd2 = fd2;
+					$scope.isSelected = true;
+				};
+		
+		$scope.uploadSignatureHandler = function() {
+			if( $scope.fd2===undefined)
+			{
+				items ="File has not been selected";
+				modalMessage(items)
+			}
+			else
+			{
+
+			
+    		$http.post("backend/profilepicture.php?what=signature", $scope.fd2, {withCredentials: true, headers: {'Content-Type': undefined },transformRequest: angular.identity })
+			.success(function(data){
+				// put whatever you want here
+				$scope.applicantSignature = $scope.applicantSignature + '?' + new Date().getTime();
+				$scope.uploadSignature = false;
+				$scope.isSavedSignature=true;
+				items ="Signature has been uploaded successfully";
+				modalMessage(items)
+
+				})
+			.error(function(errMes){
+				items ="Signature was not uploaded successfully" + "There was " + errMes + " error" ;
+				modalMessage(items);
+				
+				});
+			}
+		};
+		
+		
+// end of implementation of signature upload
+	
+// show signature buttons for upload
+	$scope.showSignButton = function()
+		{
+			$scope.uploadSignature = true;
+			}
+
+
+
+
+
+		
+
+function modalMessage(items)
+{
+	
+		  var modalInstance = $modal.open(
+		  {
+			templateUrl: 'partials/alertok.html',
+			controller: 'alertCtrl',
+			keyboard : false,
+			size:"sm",
+			resolve: {
+					  items: function () {
+						return items;
+					  }
+			}
+			
+		  });
+	
+	}	
+function indexOfAnElement(theArray, searchElement)
+{
+
+	n = theArray.length;
+	for(i=0; i<=n-1; i++)
+	{
+		theElement = theArray[i];
+		if(theElement.courseTitle===searchElement)
+		{
+			return i;
+		}
+	}
+	
+	}
+	
+function flashMessage(mess)
+{
+	$scope.messages = mess;
+	  $timeout(function(){
+	  $scope.messages = "";
+	  },2000);
+}
+});

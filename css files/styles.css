@@ -1,0 +1,66 @@
+@font-face {
+  font-family: Roboto;
+  src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf");
+}
+
+/* back to top button  - unused*/
+/* #btn-back-to-top {
+  position: fixed;
+  bottom: 120px;
+  right: 50px;
+  display: none;
+} */
+
+#scrollToTopBtn {
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 30px;
+  width: 40px;
+}
+
+/* end of back to top button */
+
+.col-auto {
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  width: auto;
+  max-width: 100%;
+}
+
+.input-group>.input-group-append:last-child>.btn:not(:last-child):not(.dropdown-toggle),
+.input-group>.input-group-append:last-child>.input-group-text:not(:last-child),
+.input-group>.input-group-append:not(:last-child)>.btn,
+.input-group>.input-group-append:not(:last-child)>.input-group-text,
+.input-group>.input-group-prepend>.btn,
+.input-group>.input-group-prepend>.input-group-text {
+  background-color: rgb(89, 89, 240);
+}
+
+i {
+  color: white;
+}
+
+legend {
+  margin-left: 20px;
+  border-radius: 5px;
+  border-style: groove;
+  border-width: thin;
+  border-color: rgb(23, 162, 184);
+  color: rgb(36, 20, 136);
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 .2rem rgba(89, 89, 240, 0.64);
+  margin-left: -5px;
+}
+
+/* .links:hover {
+  text-decoration: none;
+  text-decoration-line: none;
+} */
