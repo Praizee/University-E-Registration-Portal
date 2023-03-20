@@ -15,6 +15,7 @@
 .isEmbeddedInPortal body {
   margin: 0;
   background-color: transparent;
+  background-color: #4281DB;
 }
 
 .isEmbeddedInPortal .jotform-form {
