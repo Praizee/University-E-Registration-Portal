@@ -157,9 +157,9 @@
           <div id="cid_9" class="form-input-wide" data-layout="half">
             <div data-wrapper-react="true" class="extended notLiteMode">
               <span class="form-sub-label-container month" style="vertical-align:top">
-                <input type="tel" class="form-textbox validate[limitDate]" id="month_9" name="q9_birthDate[month]"
-                  size="2" data-maxlength="2" data-age="" maxlength="2" value="11" autocomplete="section-input_9 off"
-                  aria-labelledby="label_9 sublabel_9_month" />
+                <input type="tel" required class="form-textbox validate[limitDate]" id="month_9"
+                  name="q9_birthDate[month]" size="2" data-maxlength="2" data-age="" maxlength="2" value="11"
+                  autocomplete="section-input_9 off" aria-labelledby="label_9 sublabel_9_month" />
                 <span class="date-separate" aria-hidden="true">
 
                 </span>
@@ -167,7 +167,7 @@
                   aria-hidden="false"> Month </label>
               </span>
               <span class="form-sub-label-container day" style="vertical-align:top">
-                <input type="tel" class="currentDate form-textbox validate[limitDate]" id="day_9"
+                <input type="tel" required class="currentDate form-textbox validate[limitDate]" id="day_9"
                   name="q9_birthDate[day]" size="2" data-maxlength="2" data-age="" maxlength="2" value="10"
                   autocomplete="section-input_9 off" aria-labelledby="label_9 sublabel_9_day" />
                 <span class="date-separate" aria-hidden="true">
@@ -179,7 +179,7 @@
               <span class="form-sub-label-container year" style="vertical-align:top">
                 <input type="tel" class="form-textbox validate[limitDate]" id="year_9" name="q9_birthDate[year]"
                   size="4" data-maxlength="4" data-age="" maxlength="4" value="2022" autocomplete="section-input_9 off"
-                  aria-labelledby="label_9 sublabel_9_year" />
+                  aria-labelledby="label_9 sublabel_9_year" required />
                 <label class="form-sub-label" for="year_9" id="sublabel_9_year" style="min-height:13px"
                   aria-hidden="false"> Year </label>
               </span>
@@ -231,7 +231,7 @@
           <div id="cid_12" class="form-input-wide" data-layout="half">
             <input type="email" id="input_12" name="q12_Email Address" class="form-textbox validate[Email]"
               data-defaultvalue="" style="width:30px" size="30" value="" placeholder="Ex: myname@example.com"
-              data-component="email" aria-labelledby="label_12" />
+              data-component="email" aria-labelledby="label_12" required />
           </div>
         </li>
 
@@ -249,7 +249,7 @@
           <div id="cid_13" class="form-input-wide" data-layout="half">
             <input type="text" id="input_13" name="q13_Entry Year" data-type="input-textbox" class="form-textbox"
               data-defaultvalue="" style="width:20px" size="20" value="" placeholder="Ex: 2022" data-component="textbox"
-              aria-labelledby="label_13" />
+              aria-labelledby="label_13" required />
           </div>
         </li>
         <li class="form-line form-line-column form-col-2" data-type="control_textbox" id="id_14">
@@ -265,7 +265,7 @@
           <div id="cid_15" class="form-input-wide" data-layout="half">
             <input type="text" id="input_15" name="q15_Semester" data-type="input-textbox" class="form-textbox"
               data-defaultvalue="" style="width:20px" size="20" value="" placeholder="Ex: 1st" data-component="textbox"
-              aria-labelledby="label_15" />
+              aria-labelledby="label_15" required />
           </div>
         </li>
         <li class="form-line" data-type="control_radio" id="id_16">
@@ -331,7 +331,7 @@
               <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
                 <span class="form-address-line form-address-street-line jsTest-address-lineField">
                   <span class="form-sub-label-container" style="vertical-align:top">
-                    <input type="text" id="input_92_addr_line2" name="q92_address[addr_line2]"
+                    <input type="text" required id="input_92_addr_line2" name="q92_address[addr_line2]"
                       class="form-textbox form-address-line" data-defaultvalue=""
                       autocomplete="section-input_92 address-line2" value="" data-component="address_line_2"
                       aria-labelledby="label_92 sublabel_92_addr_line2" />
@@ -385,7 +385,7 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="areaCode">
                 <input type="tel" id="input_93_area" name="q93_homePhone[area]" class="form-textbox"
                   data-defaultvalue="" autocomplete="section-input_93 tel-area-code" value="" data-component="areaCode"
-                  aria-labelledby="label_93 sublabel_93_area" />
+                  aria-labelledby="label_93 sublabel_93_area" required />
                 <span class="phone-separate" aria-hidden="true">
                    -
                 </span>
@@ -395,7 +395,7 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="phone">
                 <input type="tel" id="input_93_phone" name="q93_homePhone[phone]" class="form-textbox"
                   data-defaultvalue="" autocomplete="section-input_93 tel-local" value="" data-component="phone"
-                  aria-labelledby="label_93 sublabel_93_phone" placeholder="" />
+                  aria-labelledby="label_93 sublabel_93_phone" placeholder="" required />
                 <label class="form-sub-label" for="input_93_phone" id="sublabel_93_phone" style="min-height:13px"
                   aria-hidden="false"> Phone Number </label>
               </span>
@@ -410,7 +410,7 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="areaCode">
                 <input type="tel" id="input_94_area" name="q94_cellPhone[area]" class="form-textbox"
                   data-defaultvalue="" autocomplete="section-input_94 tel-area-code" value="" data-component="areaCode"
-                  aria-labelledby="label_94 sublabel_94_area" />
+                  aria-labelledby="label_94 sublabel_94_area" required />
                 <span class="phone-separate" aria-hidden="true">
                    -
                 </span>
@@ -420,7 +420,7 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="phone">
                 <input type="tel" id="input_94_phone" name="q94_cellPhone[phone]" class="form-textbox"
                   data-defaultvalue="" autocomplete="section-input_94 tel-local" value="" data-component="phone"
-                  aria-labelledby="label_94 sublabel_94_phone" />
+                  aria-labelledby="label_94 sublabel_94_phone" required />
                 <label class="form-sub-label" for="input_94_phone" id="sublabel_94_phone" style="min-height:13px"
                   aria-hidden="false"> Phone Number </label>
               </span>
@@ -461,7 +461,7 @@
                     <input type="text" id="input_96_addr_line2" name="q96_address96[addr_line2]"
                       class="form-textbox form-address-line" data-defaultvalue=""
                       autocomplete="section-input_96 address-line2" value="" data-component="address_line_2"
-                      aria-labelledby="label_96 sublabel_96_addr_line2" />
+                      aria-labelledby="label_96 sublabel_96_addr_line2" required />
                     <label class="form-sub-label" for="input_96_addr_line2" id="sublabel_96_addr_line2"
                       style="min-height:13px" aria-hidden="false"> Street Address Line 2 </label>
                   </span>
@@ -549,14 +549,14 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="first">
                 <input type="text" id="first_97" name="q97_name97[first]" class="form-textbox" data-defaultvalue=""
                   autocomplete="section-input_97 given-name" size="10" value="" data-component="first"
-                  aria-labelledby="label_97 sublabel_97_first" />
+                  aria-labelledby="label_97 sublabel_97_first" required />
                 <label class="form-sub-label" for="first_97" id="sublabel_97_first" style="min-height:13px"
                   aria-hidden="false"> First Name </label>
               </span>
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="last">
                 <input type="text" id="last_97" name="q97_name97[last]" class="form-textbox" data-defaultvalue=""
                   autocomplete="section-input_97 family-name" size="15" value="" data-component="last"
-                  aria-labelledby="label_97 sublabel_97_last" />
+                  aria-labelledby="label_97 sublabel_97_last" required />
                 <label class="form-sub-label" for="last_97" id="sublabel_97_last" style="min-height:13px"
                   aria-hidden="false"> Last Name </label>
               </span>
@@ -572,7 +572,7 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="areaCode">
                 <input type="tel" id="input_98_area" name="q98_phoneNumber[area]" class="form-textbox"
                   data-defaultvalue="" autocomplete="section-input_98 tel-area-code" value="" data-component="areaCode"
-                  aria-labelledby="label_98 sublabel_98_area" />
+                  aria-labelledby="label_98 sublabel_98_area" required />
                 <span class="phone-separate" aria-hidden="true">
                    -
                 </span>
@@ -582,7 +582,7 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="phone">
                 <input type="tel" id="input_98_phone" name="q98_phoneNumber[phone]" class="form-textbox"
                   data-defaultvalue="" autocomplete="section-input_98 tel-local" value="" data-component="phone"
-                  aria-labelledby="label_98 sublabel_98_phone" />
+                  aria-labelledby="label_98 sublabel_98_phone" required />
                 <label class="form-sub-label" for="input_98_phone" id="sublabel_98_phone" style="min-height:13px"
                   aria-hidden="false"> Phone Number </label>
               </span>
@@ -605,14 +605,14 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="first">
                 <input type="text" id="first_99" name="q99_name99[first]" class="form-textbox" data-defaultvalue=""
                   autocomplete="section-input_99 given-name" size="10" value="" data-component="first"
-                  aria-labelledby="label_99 sublabel_99_first" />
+                  aria-labelledby="label_99 sublabel_99_first" required />
                 <label class="form-sub-label" for="first_99" id="sublabel_99_first" style="min-height:13px"
                   aria-hidden="false"> First Name </label>
               </span>
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="last">
                 <input type="text" id="last_99" name="q99_name99[last]" class="form-textbox" data-defaultvalue=""
                   autocomplete="section-input_99 family-name" size="15" value="" data-component="last"
-                  aria-labelledby="label_99 sublabel_99_last" />
+                  aria-labelledby="label_99 sublabel_99_last" required />
                 <label class="form-sub-label" for="last_99" id="sublabel_99_last" style="min-height:13px"
                   aria-hidden="false"> Last Name </label>
               </span>
@@ -627,7 +627,7 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="areaCode">
                 <input type="tel" id="input_100_area" name="q100_phoneNumber100[area]" class="form-textbox"
                   data-defaultvalue="" autocomplete="section-input_100 tel-area-code" value="" data-component="areaCode"
-                  aria-labelledby="label_100 sublabel_100_area" />
+                  aria-labelledby="label_100 sublabel_100_area" required />
                 <span class="phone-separate" aria-hidden="true">
                    -
                 </span>
@@ -637,7 +637,7 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="phone">
                 <input type="tel" id="input_100_phone" name="q100_phoneNumber100[phone]" class="form-textbox"
                   data-defaultvalue="" autocomplete="section-input_100 tel-local" value="" data-component="phone"
-                  aria-labelledby="label_100 sublabel_100_phone" />
+                  aria-labelledby="label_100 sublabel_100_phone" required />
                 <label class="form-sub-label" for="input_100_phone" id="sublabel_100_phone" style="min-height:13px"
                   aria-hidden="false"> Phone Number </label>
               </span>
@@ -660,14 +660,14 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="first">
                 <input type="text" id="first_101" name="q101_name101[first]" class="form-textbox" data-defaultvalue=""
                   autocomplete="section-input_101 given-name" size="10" value="" data-component="first"
-                  aria-labelledby="label_101 sublabel_101_first" />
+                  aria-labelledby="label_101 sublabel_101_first" required />
                 <label class="form-sub-label" for="first_101" id="sublabel_101_first" style="min-height:13px"
                   aria-hidden="false"> First Name </label>
               </span>
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="last">
                 <input type="text" id="last_101" name="q101_name101[last]" class="form-textbox" data-defaultvalue=""
                   autocomplete="section-input_101 family-name" size="15" value="" data-component="last"
-                  aria-labelledby="label_101 sublabel_101_last" />
+                  aria-labelledby="label_101 sublabel_101_last" required />
                 <label class="form-sub-label" for="last_101" id="sublabel_101_last" style="min-height:13px"
                   aria-hidden="false"> Last Name </label>
               </span>
@@ -682,7 +682,7 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="areaCode">
                 <input type="tel" id="input_102_area" name="q102_phoneNumber102[area]" class="form-textbox"
                   data-defaultvalue="" autocomplete="section-input_102 tel-area-code" value="" data-component="areaCode"
-                  aria-labelledby="label_102 sublabel_102_area" />
+                  aria-labelledby="label_102 sublabel_102_area" required />
                 <span class="phone-separate" aria-hidden="true">
                    -
                 </span>
@@ -692,7 +692,7 @@
               <span class="form-sub-label-container" style="vertical-align:top" data-input-type="phone">
                 <input type="tel" id="input_102_phone" name="q102_phoneNumber102[phone]" class="form-textbox"
                   data-defaultvalue="" autocomplete="section-input_102 tel-local" value="" data-component="phone"
-                  aria-labelledby="label_102 sublabel_102_phone" />
+                  aria-labelledby="label_102 sublabel_102_phone" required />
                 <label class="form-sub-label" for="input_102_phone" id="sublabel_102_phone" style="min-height:13px"
                   aria-hidden="false"> Phone Number </label>
               </span>
@@ -704,7 +704,7 @@
           <div id="cid_56" class="form-input-wide" data-layout="half">
             <input type="text" id="input_56" name="q56_Preferred Hospital" data-type="input-textbox"
               class="form-textbox" data-defaultvalue="" style="width:20px" size="20" value="" placeholder=" "
-              data-component="textbox" aria-labelledby="label_56" />
+              data-component="textbox" aria-labelledby="label_56" required />
           </div>
         </li>
         <li class="form-line" data-type="control_textbox" id="id_57">
@@ -714,7 +714,7 @@
           <div id="cid_57" class="form-input-wide" data-layout="half">
             <input type="text" id="input_57" name="q57_Insurance/Health Coverage (Company)" data-type="input-textbox"
               class="form-textbox" data-defaultvalue="" style="width:20px" size="20" value="" placeholder=" "
-              data-component="textbox" aria-labelledby="label_57" />
+              data-component="textbox" aria-labelledby="label_57" required />
           </div>
         </li>
         <li class="form-line" data-type="control_textarea" id="id_58">
@@ -770,7 +770,7 @@
           <div id="cid_62" class="form-input-wide" data-layout="half">
             <input type="text" id="input_62" name="q62_School Name" data-type="input-textbox" class="form-textbox"
               data-defaultvalue="" style="width:20px" size="20" value="" placeholder=" " data-component="textbox"
-              aria-labelledby="label_62" />
+              aria-labelledby="label_62" required />
           </div>
         </li>
         <li class="form-line form-line-column form-col-2" data-type="control_textbox" id="id_63">
@@ -778,7 +778,7 @@
           <div id="cid_63" class="form-input-wide" data-layout="half">
             <input type="text" id="input_63" name="q63_City" data-type="input-textbox" class="form-textbox"
               data-defaultvalue="" style="width:20px" size="20" value="" placeholder=" " data-component="textbox"
-              aria-labelledby="label_63" />
+              aria-labelledby="label_63" required />
           </div>
         </li>
         <li class="form-line form-line-column form-col-3" data-type="control_dropdown" id="id_64">
@@ -802,7 +802,7 @@
               <span class="form-sub-label-container month" style="vertical-align:top">
                 <input type="tel" class="form-textbox validate[limitDate]" id="month_65" name="q65_Date Started[month]"
                   size="2" data-maxlength="2" data-age="" maxlength="2" value="11" autocomplete="section-input_65 off"
-                  aria-labelledby="label_65 sublabel_65_month" />
+                  aria-labelledby="label_65 sublabel_65_month" required />
                 <span class="date-separate" aria-hidden="true">
                    -
                 </span>
@@ -812,7 +812,7 @@
               <span class="form-sub-label-container day" style="vertical-align:top">
                 <input type="tel" class="currentDate form-textbox validate[limitDate]" id="day_65"
                   name="q65_Date Started[day]" size="2" data-maxlength="2" data-age="" maxlength="2" value="10"
-                  autocomplete="section-input_65 off" aria-labelledby="label_65 sublabel_65_day" />
+                  autocomplete="section-input_65 off" aria-labelledby="label_65 sublabel_65_day" required />
                 <span class="date-separate" aria-hidden="true">
 
                 </span>
@@ -822,7 +822,7 @@
               <span class="form-sub-label-container year" style="vertical-align:top">
                 <input type="tel" class="form-textbox validate[limitDate]" id="year_65" name="q65_Date Started[year]"
                   size="4" data-maxlength="4" data-age="" maxlength="4" value="2022" autolomplete="section-input_65 off"
-                  aria-labelledby="label_65 sublabel_65_year" />
+                  aria-labelledby="label_65 sublabel_65_year" required />
                 <label class="form-sub-label" for="year_65" id="sublabel_65_year" style="min-height:13px"
                   aria-hidden="false"> Year </label>
               </span>
@@ -844,7 +844,7 @@
               <span class="form-sub-label-container month" style="vertical-align:top">
                 <input type="tel" class="form-textbox validate[limitDate]" id="month_66" name="q66_Date Ended[month]"
                   size="2" data-maxlength="2" data-age="" maxlength="2" value="11" autocomplete="section-input_66 off"
-                  aria-labelledby="label_66 sublabel_66_month" />
+                  aria-labelledby="label_66 sublabel_66_month" required />
                 <span class="date-separate" aria-hidden="true">
                    -
                 </span>
@@ -854,7 +854,7 @@
               <span class="form-sub-label-container day" style="vertical-align:top">
                 <input type="tel" class="currentDate form-textbox validate[limitDate]" id="day_66"
                   name="q66_Date Ended[day]" size="2" data-maxlength="2" data-age="" maxlength="2" value="10"
-                  autocomplete="section-input_66 off" aria-labelledby="label_66 sublabel_66_day" />
+                  autocomplete="section-input_66 off" aria-labelledby="label_66 sublabel_66_day" required />
                 <span class="date-separate" aria-hidden="true">
                    -
                 </span>
