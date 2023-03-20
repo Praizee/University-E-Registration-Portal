@@ -27,7 +27,8 @@
     "axe/parsing": [
       "default",
       {
-        "duplicate-id-active": "off"
+        "duplicate-id-active": "off",
+        "duplicate-id-aria": "off"
       }
     ],
     "compat-api/html": [
@@ -36,6 +37,12 @@
         "ignore": [
           "img[loading]"
         ]
+      }
+    ],
+    "axe/aria": [
+      "default",
+      {
+        "aria-input-field-name": "off"
       }
     ]
   }
