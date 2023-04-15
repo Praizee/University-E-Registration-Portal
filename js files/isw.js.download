@@ -1,0 +1,356 @@
+// JavaScript Document
+function framework_load_plugin_url(plugin,form,div,framework_path,on_success_start,on_success_end)  {
+	document.MM_returnValue = false;
+	framework_ajax_plugin(form,plugin,div,framework_path,false,on_success_start,on_success_end); 
+	return true;	
+}
+function message(title,content,type)
+{
+	    $.alert({
+        title: title,
+        content:'' +
+    			'<div class="p-3">' +
+    				content +
+				'</div>' , 
+			useBootstrap: false,
+			boxWidth: '50%',
+			   theme: 'light',
+			 type: type,
+    });
+}
+
+function buzz(title, content,color)
+{
+	    $.confirm({
+        title: title,
+        content: content,
+        type: color,
+        typeAnimated: true,
+        buttons: {
+            tryAgain: {
+                text: 'Ok',
+                btnClass: 'btn-'+color,
+                action: function(){
+                }
+            }
+        }
+    });
+}
+
+function msg(sms)
+{
+				$.alert({
+							icon: 'fa fa-warning',
+							title: 'Message',
+							content: sms,
+							type: 'blue',							
+						});	
+}
+
+        function checkout(){
+          var transRef = ref();
+			document.getElementsByName('txnref')[0].value=transRef;
+		  var paymentRequest = {
+					  merchant_code: document.getElementsByName('merchantcode')[0].value,
+					  pay_item_id: document.getElementsByName('payitemid')[0].value,
+			  			pay_item_name: document.getElementsByName('service1')[0].value,
+					  txn_ref: transRef,
+					  amount: (Number(document.getElementsByName('amountt1')[0].value)  + 200) * 100,
+					  cust_id: document.getElementsByName('email')[0].value,
+			  		  cust_name: document.getElementsByName('fullname')[0].value,
+			  		  cust_email: document.getElementsByName('email')[0].value,
+			  		  cust_mobile_no: document.getElementsByName('phoneno')[0].value,
+					  currency:  '566',
+					  site_redirect_url: window.location.origin,
+					  onComplete: paymentCallback,
+					  mode: 'LIVE'
+					};
+		   window.webpayCheckout(paymentRequest);
+        }
+
+        //generate a random transaction ref
+		function ref() {
+			var length = 12;
+			var chars = '0123456789';
+			var result = '';
+			for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+			return result;
+		}
+
+        //callback function that gets triggered on payment success or failure
+		function paymentCallback(response){
+					
+			 if(response != null){
+				 
+		        if(response.resp == '00'){
+					payamount= Number(document.getElementsByName('amountt1')[0].value)  + 200;
+				let arg={trx:response.txnref,
+					myamount:Number(document.getElementsByName('amountt1')[0].value)  + 200,
+					fullname:document.getElementsByName('fullname')[0].value,
+					email:document.getElementsByName('email')[0].value,
+					phoneno:document.getElementsByName('phoneno')[0].value,
+					service:document.getElementsByName('service1')[0].value,
+					subserv:document.getElementsByName('subserv1')[0].value,
+					examno:document.getElementsByName('examno')[0].value};
+					$.post('script/insertPay.php',arg,function(status){
+					if(status=='1')
+					{
+						var msgTransaction = "Your payment for " + document.getElementsByName('service1')[0].value  + " is successful.<br> The following are your transaction details:<br><br>" + "<strong>Transaction Amount: " + payamount + "<br>" + "Transaction Reference: " + response.txnref + "<br>"  +  "Status: " + response.desc + "</strong>.<br><br> Contact us at info@ramatpoly.edu.ng for enquiries.<br><br>Thank you.<br><button class='btn btn-success m-2' type='button' onClick='rsetsess(" + response.txnref + ")'><i class='fa fa-print'> Receipt</i></button>"; 
+					
+						$.post('script/tranMsg.php',{msg:msgTransaction, email: document.getElementsByName('email')[0].value},function(mstatus){
+							
+						}); 
+						 $('#mypay').modal('hide');
+					buzz("Transaction Success", msgTransaction,'blue');
+					//	printslip(response.txnref);
+					}
+			else{
+				buzz("Transaction Failed","Transaction was not successful.</br>Reason: "+ response.resp,'red');
+			}
+			
+		});   
+				}
+				 else{
+					buzz("Transaction Failed","Transation was not successful.</br>Reason: "+ response.desc,'red');
+				 }
+		    }
+
+
+		}
+
+function verifyPay(ref,amount)
+{
+	$('#btnVerify').prop('disabled',true);
+		$.post('script/verifypay.php',{txn_reff:ref, myamount:amount},function(status){
+			if(status != "")
+				{
+					message("Transaction Details",status,'blue');
+					$('#btnVerify').prop('disabled',false);
+				}
+			else{
+				buzz("Transaction Failed","Transation was not successful",'red');
+				$('#btnVerify').prop('disabled',false);
+			}
+			
+		});   
+}
+function rverifyPay(ref,amount)
+{
+		$.post('script/verifypay.php',{txn_reff:ref, myamount:amount},function(status){
+			if(status != "")
+				{
+					$('#imgloading').css('display','none');
+						$('#ttdetails').html(status);
+					$('#trxshow').css('display','block');
+				}
+			else{
+				$('#imgloading').css('display','none');
+					$('#ttdetails').html("Transaction not found!");
+			}
+			
+		});   
+}
+
+function rverifyresult(ref)
+{
+		$.post('script/verifyresults.php',{txn_reff:ref},function(status){
+			if(status != "")
+				{
+					$('#imgloading').css('display','none');
+						$('#stdetails').html(status);
+					$('#trxshow1').css('display','block');
+				}
+			else{
+				$('#imgloading').css('display','none');
+					$('#stdetails').html("Transaction not found!");
+			}
+			
+		});   
+}
+function iverifyPay()
+{
+	var ttref = $('#tref').val();
+	var ttamount = $('#tamount').val();
+	$('#btnver').prop('disabled',true);
+	
+	if(ttref == '')
+		{
+			msg("Enter Transaction Reference Number");
+			$('#btnver').prop('disabled',false);
+		}
+	else if(ttamount <= 0)
+		{
+			msg("Enter Transaction Amount");
+			$('#btnver').prop('disabled',false);
+		}
+	else{
+		$.post('script/verifypay.php',{txn_reff:ttref, myamount:ttamount},function(status){
+			if(status != "")
+				{
+					$('#tdetails').html(status);
+					$('#btnver').prop('disabled',false);
+				}
+			else{
+				$('#tdetails').html('Transaction not found');
+				$('#btnver').prop('disabled',false);
+			}
+			
+		}); 
+	}
+}
+
+function subservice()
+{
+	var id = $('#service').children("option:selected").val();
+	var service = $('#service').children("option:selected").html();
+	if(id != '')
+		{
+			$('#amount1').val('');
+			$.post("script/subservice.php",{id:id},function(results){
+									 var str = results.split("*");
+									  $('#subserv').empty();
+										 $('#subserv').append($('<option></option>').val("").html("Select a value"));
+									 for( var x=0;x<str.length-1;x=x+2){
+										  $('#subserv').append($('<option></option>').val(str[x]).html(str[x+1]));
+									 }
+				$('#service1').val(service);
+				if(service == "Collection of Admission Letter")
+					{
+						$('#lexamno').text('Admission No.');
+						$('#examno').prop('placeholder','Admission No.');
+					}
+				else{
+					$('#lexamno').text('Exam No.');
+						$('#examno').prop('placeholder','Exam No.');
+				}
+
+
+										});
+			
+		}
+}
+
+function subservicee()
+{
+	
+	var idsub = $('#subserv').children("option:selected").val();
+	var id = $('#service').children("option:selected").val();
+	if(id != '' && idsub != '')
+		{
+			$('#amount1').val('');
+			$.post("script/subamount.php",{id:id, idsub:idsub},function(results){
+									if(results != 0)
+										{
+											var nf = new Intl.NumberFormat('en-US');
+											$('#amount1').val('N' + nf.format(results));
+											$('#amountt1').val(results);
+										}
+$('#subserv1').val($('#subserv').children("option:selected").html())
+
+										});
+			
+		}
+}
+
+$("#frmPay").on("submit", function(event){
+	  event.preventDefault();
+	checkout();
+});
+
+function setsess()
+{
+	$.post('script/ssess.php',{trx: treff.value},function(status){
+		if(status=='1')
+			{
+				//MM_openBrWindow('receipt/sReceipt.php','Receipt','width=400');
+				framework_load_plugin_url('receipt/sReceipt.php',document.getElementById('frmreceipt'),'divreceipts','','');
+				$('#reprint').modal('toggle');
+				$('#rreceive').modal('show');
+				
+			}
+		else if(status == '0')
+			{
+				buzz("Search result", "Transanction not found!",'red');
+						
+			}
+		
+	});
+}
+
+function setsessform()
+{
+	$.post('script/ssess1.php',{trx: streff.value},function(status){
+		if(status == 'nt')
+			{
+				buzz("Search result", "Transanction not found or do not corresponse to this service!",'red');
+						
+			}
+		else if(status == 'ng')
+			{
+				buzz("Search result", "Candidate not found in graduation list!",'red');
+						
+			}
+		else if(status=='1')
+			{
+				//MM_openBrWindow('receipt/sReceipt.php','Receipt','width=400');
+				//framework_load_plugin_url('receipt/clearance.php',document.getElementById('frmresult'),'divstresult','','');
+				
+				
+
+  $.post('receipt/clearance.php',{},function(result){
+				$('#divstresult').html(result);	
+				
+				});
+	$('#reprintform').modal('toggle');
+				 $('#stresult').modal('show');
+				
+				
+				
+			}
+		else if(status == '0')
+			{
+				buzz("Search result", "Wrong Transanction!",'red');
+						
+			}
+		
+	});
+}
+
+function rsetsess(treff)
+{
+	$.post('script/ssess.php',{trx: treff},function(status){
+		if(status=='1')
+			{
+				//MM_openBrWindow('receipt/sReceipt.php','Receipt','width=400');
+				framework_load_plugin_url('receipt/sReceipt.php',document.getElementById('frmreceipt'),'divreceipts','','');
+				$('#rreceive').modal('show');
+				
+			}
+		
+	});
+}
+
+
+function printslip(trx)
+{
+	$.post('script/ssess.php',{trx: trx},function(status){
+		if(status=='1')
+			{
+				$('#rclose').click();
+				MM_openBrWindow('receipt/sReceipt.php','Receipt','width=800');
+			}
+		else if(status == '0')
+			{
+				buzz("Search result", "Transanction not found!",'red');
+						
+			}
+		
+	});
+}
+
+function rrclose(){
+	$('#reprint').modal('toggle');
+}
+function stclose(){
+	$('#reprintform').modal('toggle');
+}
