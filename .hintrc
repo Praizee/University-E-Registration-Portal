@@ -45,6 +45,7 @@
         "aria-input-field-name": "off",
         "aria-required-children": "off"
       }
-    ]
+    ],
+    "highest-available-document-mode": "off"
   }
 }
