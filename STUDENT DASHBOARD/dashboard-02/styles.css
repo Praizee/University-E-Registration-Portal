@@ -71,7 +71,15 @@ nav .fas {
     margin-left: 10px;
 }
 
-a:hover {
+.active-nav {
+    background: #e5e4e4;
+}
+
+nav ul li:first-child:hover {
+    background: white;
+}
+
+nav ul li:hover {
     background: #eee;
 }
 
@@ -119,11 +127,12 @@ a:hover {
 
 .main-skills .card h3 {
     margin: 10px;
+    font-size: 1.45rem;
     text-transform: capitalize;
 }
 
 .main-skills .card p {
-    font-size: 12px;
+    font-size: 0.8rem;
 }
 
 .main-skills .card button {
@@ -132,6 +141,7 @@ a:hover {
     padding: 7px 15px;
     border-radius: 10px;
     margin-top: 15px;
+    font-size: 0.85rem;
     cursor: pointer;
 }
 
@@ -139,7 +149,83 @@ a:hover {
     background: rgba(223, 70, 15, 0.856);
 }
 
+.main-skills .card .stroke {
+    font-size: 1.5rem;
+}
+
 .main-skills .card {
-    font-size: 22px;
+    font-size: 1.25rem;
     padding: 10px;
+}
+
+/* Courses */
+.main-course {
+    margin-top: 20px;
+    text-transform: capitalize;
+}
+
+.course-box {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.course-box ul {
+    list-style: none;
+    display: flex;
+}
+
+.course-box ul li {
+    margin: 10px;
+    color: gray;
+    cursor: pointer;
+}
+
+.course-box ul .active {
+    color: #000;
+    border-bottom: 1px solid black;
+}
+
+.course-box .course {
+    display: flex;
+}
+
+.box {
+    width: 33%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background: rgb(235, 233, 233);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.box p {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.box button {
+    background: black;
+    color: #fff;
+    padding: 7px 10px;
+    border-radius: 10px;
+    margin-top: 3rem;
+    cursor: pointer;
+}
+
+.bos button:hover {
+    background: rgba(0, 0, 0, 0.842);
+}
+
+.box i {
+    font-size: 7rem;
+    float: right;
+    margin: -20px 20px 20px 0;
+}
+
+.html {
+    color: rgb(25, 94, 54);
 }
