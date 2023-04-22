@@ -86,7 +86,7 @@ nav ul li:hover {
 .logout {
     position: relative;
     /* I added top... */
-    top: 3rem;
+    /* top: 3rem; */
     bottom: 0;
 }
 
