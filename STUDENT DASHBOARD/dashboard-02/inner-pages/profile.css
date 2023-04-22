@@ -1,0 +1,44 @@
+.primary {
+    background-color: white;
+    width: 25%;
+    padding: 10px;
+    margin: 30px 0px 0px 10px;
+    border-radius: 15px;
+    font-size: 18px;
+}
+
+.primary h3 {
+    text-align: center;
+    padding: 5px;
+}
+
+.primary p {
+    /* background: #d4d2d2; */
+    background: #dadada;
+    /* background-color: rgb(110, 109, 109); */
+    padding: 10px;
+    border: 8px solid white;
+    border-radius: 10px;
+}
+
+.profile {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.edit {
+    width: 100%;
+    background-color: none;
+    padding: 10px;
+    margin: 12px 0px 0px 0px;
+}
+
+.edit button {
+    padding: 10px;
+    font-size: 1rem;
+    background: white;
+    border-radius: 5px;
+    float: left;
+    cursor: pointer;
+}
