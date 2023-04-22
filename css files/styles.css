@@ -3,6 +3,20 @@
   src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf");
 }
 
+
+/* this media query ensures that mobile devices are not allowed to view the page */
+@media screen and (max-device-width : 1150px) {
+
+  /* or 950px */
+  html,
+  body {
+    display: none;
+    background-color: Black;
+  }
+}
+
+/* end of media query */
+
 /* back to top button  - unused*/
 /* #btn-back-to-top {
   position: fixed;
