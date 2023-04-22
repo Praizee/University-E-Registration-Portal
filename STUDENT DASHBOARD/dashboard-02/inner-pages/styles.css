@@ -104,9 +104,13 @@ nav ul li:hover {
 
 .main-top i {
     position: absolute;
+    top: 0;
     right: 0;
     margin: 10px 30px;
     color: rgb(110, 109, 109);
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
