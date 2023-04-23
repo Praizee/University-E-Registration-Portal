@@ -95,30 +95,52 @@
                     <input type="text" name="Matriculation No." id="" value="Matriculation No. (from javascript)"
                         disabled>
                     <input type="text" name="Username" id="" value="Username" placeholder="Surname in capital letters">
-                    <span class="password">
-                        <input type="password" name="Password" id="myInput" placeholder="Password">
 
-                        <button onclick="myFunction()"><i class="fas fa-eye"></i></button>
+                    <span class="password">
+                        <input type="password" name="Current Password" id="myInput" placeholder="Current Password">
+                        <i class="fas fa-eye" onclick="myFunction()"></i>
                     </span>
 
+                    <input type="password" name="New Password" placeholder="New Password">
+
+                    <div class="buttons">
+                        <button type="button" class="save">
+                            <i class="fas fa-user-check"></i> Save Changes
+
+                        </button>
+
+                        <button type="button" class="delete">
+                            <i class="fas fa-cancel"></i> Delete Account
+                        </button>
+
+                    </div>
+
+
+
+
+
+                    <!-- modal form -->
+                    <!-- <div id="id01" class="modal">
+
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                        title="Close Modal">&times;</span>
+
+                    <form class="modal-content" action="../../../Login and Signup/Login/Login form.html">
+                        <div class="container">
+                            <h1>Delete Account</h1>
+                            <p>Are you sure you want to delete your account?</p>
+
+                            <div class="clearfix">
+                                <button type="button" class="cancelbtn">Cancel</button>
+                                <button type="button" class="deletebtn">Delete</button>
+                            </div>
+                        </div>
+                    </form>
+                </div> -->
+                    <!-- end of modal form -->
+
+
                 </div>
-
-                <div class="save">
-                    <button type="button">
-                        <i class="fas fa-user-check"></i> Save Changes
-
-                    </button>
-                </div>
-
-                <div class="edit">
-                    <button type="button">
-                        <i class="fas fa-edit"></i> Delete Account
-                    </button>
-                </div>
-
-
-
-            </div>
 
         </section>
     </div>
