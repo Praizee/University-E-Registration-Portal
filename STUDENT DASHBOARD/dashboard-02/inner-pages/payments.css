@@ -1,0 +1,28 @@
+.payments h2 {
+    color: red;
+    margin-top: 20px;
+}
+
+.pay-btn {
+    display: flex;
+    padding: 10px;
+    background: #53AF50;
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+    margin-top: 20px;
+    margin-right: 0px;
+    padding-right: 0;
+}
+
+.pay-btn a {
+    color: black;
+    font-size: 1.1rem;
+    display: flex;
+}
+
+.pay-btn i {
+    font-size: 1.2rem;
+    display: flex;
+    margin-top: 12px;
+}
