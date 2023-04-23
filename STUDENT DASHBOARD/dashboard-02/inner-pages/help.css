@@ -48,22 +48,27 @@ textarea::placeholder {
     padding: 10px;
 }
 
+.buttons {
+    display: flex;
+    margin-left: 0;
+}
+
 .submit {
     display: flex;
     background: #53AF50;
-    width: 40%;
+    width: 35%;
     border-radius: 10px;
     padding: 5px;
     justify-content: center;
     cursor: pointer;
-    margin: 10px 10px 0px 70px;
+    margin: 10px 10px 0px 20px;
 }
 
 .submit button {
     /* background: #dadada; */
     cursor: pointer;
     padding: 5px;
-    width: 40%;
+    width: 60%;
     font-size: 1rem;
     background-color: #4CAF50;
     border-radius: 5px;
@@ -72,5 +77,32 @@ textarea::placeholder {
 }
 
 .submit i {
+    margin-top: 7px;
+}
+
+.cancel {
+    display: flex;
+    background-color: #E96565;
+    width: 35%;
+    border-radius: 10px;
+    padding: 5px;
+    justify-content: center;
+    cursor: pointer;
+    margin: 10px 10px 0px 20px;
+}
+
+.cancel button {
+    /* background: #dadada; */
+    cursor: pointer;
+    padding: 5px;
+    width: 60%;
+    font-size: 1rem;
+    background-color: #E96565;
+    border-radius: 5px;
+    /* margin: 10px 10px 10px 10px; */
+    /* margin-left: 50rem; */
+}
+
+.cancel i {
     margin-top: 7px;
 }
