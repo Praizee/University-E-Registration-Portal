@@ -1,8 +1,31 @@
+.main img {
+    width: 15%;
+    background-color: white;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    float: left;
+    margin: 50px 0px 10px 20px;
+    right: 0;
+}
+
+.edit-image {
+    margin-top: 14rem;
+    margin-left: -6.5rem;
+    padding: 5px;
+    float: left;
+    width: 7%;
+    font-size: 1rem;
+    background: rgb(234, 101, 101);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .primary {
     background-color: white;
     width: 25%;
     padding: 10px;
-    margin: 30px 0px 0px 10px;
+    margin: 20px 0px 0px 10px;
     border-radius: 15px;
     font-size: 18px;
 }
@@ -24,21 +47,24 @@
 .profile {
     display: flex;
     gap: 30px;
-    justify-content: center;
+    float: center;
+    justify-content: right;
 }
 
 .edit {
     width: 100%;
     background-color: none;
+    /* background: black; */
     padding: 10px;
     margin: 12px 0px 0px 0px;
 }
 
 .edit button {
     padding: 10px;
+    width: 10%;
     font-size: 1rem;
-    background: white;
+    background: rgb(234, 101, 101);
     border-radius: 5px;
-    float: left;
+    margin-left: 50rem;
     cursor: pointer;
 }
