@@ -1,15 +1,34 @@
-//Hey there!
-
-
 // show/hide password
-function myFunction() {
-    var x = document.getElementById("myInput");
+function Function01() {
+    var x = document.getElementById("Input01");
     if (x.type === "password") {
         x.type = "text";
     } else {
         x.type = "password";
     }
 }
+
+// new password
+function Function02() {
+    var x = document.getElementById("Input02");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
+// confirm new password
+function Function03() {
+    var x = document.getElementById("Input03");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
+
 
 
 
