@@ -20,6 +20,15 @@
     display: flex;
 }
 
+.password i {
+    cursor: pointer;
+    padding: 6px;
+}
+
+.password button {
+    background: none;
+}
+
 .edit {
     display: block;
     width: 100%;
