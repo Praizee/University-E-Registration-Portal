@@ -1,0 +1,10 @@
+/* edit!!!!!!!! */
+
+.unkmown {
+    display: grid;
+    grid-template-columns: 6fr 6fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    justify-items: stretch;
+    align-items: stretch;
+}
