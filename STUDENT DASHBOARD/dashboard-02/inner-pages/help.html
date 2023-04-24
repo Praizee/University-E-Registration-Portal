@@ -93,7 +93,8 @@
 
 
             <div class="help">
-                <form id="contact-form" action="https://formsubmit.co/thebellstech23@gmail.com" method="POST">
+                <form id="contact-form" action="https://formsubmit.co/thebellstech23@gmail.com" method="POST"
+                    enctype="multipart/form-data">
                     <input type="hidden" name="_template" value="table">
                     <input type="hidden" name="_autoresponse"
                         value="Your Complaint has been received. You will receive a response within 48hours. Thank You.">
@@ -103,10 +104,10 @@
                     <input type="number" name="Level" id="level" placeholder="Level" required>
                     <input type="text" name="Department" id="department" placeholder="Department" required>
                     <input type="email" name="Email" id="email" placeholder="Email" required>
-                    <textarea type="text" name="Issue/Complaint." id="issue/complaint" placeholder="Complaint/Issue"
-                        maxlength="1000" required></textarea>
-                    <input type="file" name="Screenshot of Issue" value="Screenshot of issue" id="screenshot"
-                        placeholder="Email">
+                    <textarea type="text" name="Issue/Complaint." id="issue/complaint"
+                        placeholder="Details of your complaint" maxlength="1000" required></textarea>
+                    <input type="file" value="Screenshot of issue" id="screenshot" placeholder="Email" name="attachment"
+                        accept="image/png, image/jpeg">
 
                     <div class="buttons">
                         <span class="submit">
