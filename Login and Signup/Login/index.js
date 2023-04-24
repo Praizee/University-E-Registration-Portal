@@ -9,17 +9,17 @@ var options = {
     "enabled": true,
     "chatButtonSetting": {
         "backgroundColor": "#4dc247",
-        "ctaText": "",
-        "borderRadius": "20",
+        "ctaText": "Chat",
+        "borderRadius": "25",
         "marginLeft": "0",
         "marginBottom": "20",
         "marginRight": "50",
         "position": "right"
     },
     "brandSetting": {
-        "brandName": "Scholastic University",
+        "brandName": "The Bells University",
         "brandSubTitle": "Typically replies within a day",
-        "brandImg": "https://cdn-icons-png.flaticon.com/512/1344/1344761.png",
+        "brandImg": "../images/cropped-Bells-Logo.2png.png",
         "welcomeText": "Hi there!\nHow can I help you?",
         "messageText": "Hello, I have a question about ...",
         "backgroundColor": "#0a5f54",
@@ -34,4 +34,5 @@ s.onload = function () {
 };
 var x = document.getElementsByTagName('script')[0];
 x.parentNode.insertBefore(s, x);
+
 // End of Whatsapp Script
