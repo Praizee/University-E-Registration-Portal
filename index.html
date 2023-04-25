@@ -563,9 +563,6 @@
 					<div class="modal-body" style="padding-left: 30px; padding-right: 30px;">
 						<fieldset>
 							<form id="frmPay" name="frmPay" method="post" enctype="multipart/form-data">
-								<input name="merchantcode" type="hidden" value="MX52420">
-								<input name="payitemid" type="hidden" value="2994316">
-								<input name="txnref" id="txnref" type="hidden">
 								<div class="container" style="padding-top: 5px;padding-bottom: 5px;">
 									<div class="row">
 										<label class="form-label">Full Name
@@ -700,13 +697,13 @@
 										<hr>
 
 										<div class="row">
-											<a href="#">
-												<button id="iswPay" class="btn btn-success m-3" type="submit"
-													style="min-width: 120px;">
-													<i class="fa fa-money-bill"></i> Pay
-													<!-- style="min-width: 120px;"><i class="fas fa-money-check"></i> Pay -->
-												</button>
-											</a>
+											<!-- <a href="#"> -->
+											<button id="iswPay" class="btn btn-success m-3" type="submit"
+												style="min-width: 120px;">
+												<i class="fa fa-money-bill"></i> Pay
+												<!-- style="min-width: 120px;"><i class="fas fa-money-check"></i> Pay -->
+											</button>
+											<!-- </a> -->
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<!-- add remita payment here to the Pay button-->
@@ -746,7 +743,7 @@
 						<ul class="list-group">
 							<li class="list-group-item">
 								<button class="btn btn-primary btn-block" type="button" role="button"
-									data-toggle="modal" data-target="#mypay" data-dismiss="modal">
+									data-toggle="modal" data-target="#mypay" data-dismiss="modal" oncli>
 									<i class="fa fa-money-bill"></i> Make payment
 								</button>
 							</li>
@@ -1186,5 +1183,3 @@
 </html>
 
 <!-- saved from url=(0022)https://ramatpoly.net/ -->
-
-<!-- <img src="./images/cropped-Bells-Logo.2png.png" alt="Logo2"> -->
