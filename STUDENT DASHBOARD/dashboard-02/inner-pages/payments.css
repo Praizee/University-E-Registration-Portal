@@ -15,14 +15,18 @@
     padding-right: 0;
 }
 
-.pay-btn a {
+.pay-btn button {
     color: black;
+    background: none;
     font-size: 1.1rem;
     display: flex;
+    padding: 5px;
+    cursor: pointer;
 }
 
 .pay-btn i {
     font-size: 1.2rem;
     display: flex;
-    margin-top: 12px;
+    margin-top: 7px;
+    margin-left: 12px;
 }
