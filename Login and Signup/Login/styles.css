@@ -24,6 +24,11 @@ body {
     /* background-color: #B89407; */
 }
 
+img {
+    margin-top: -20px;
+    padding: 0;
+}
+
 input {
     color: #eaf0fb;
 }
@@ -34,7 +39,8 @@ span.psw {
 }
 
 .remember {
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: -20px;
 }
 
 .background {
@@ -188,4 +194,24 @@ select {
 .Logo1 {
     margin: 0;
     padding: 0;
+}
+
+
+.password-box i {
+    display: flex;
+    margin-top: -2rem;
+    margin-left: 18rem;
+}
+
+.secret-answer i {
+    display: flex;
+    margin-top: -2rem;
+    margin-left: 18rem;
+}
+
+.instruction {
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    padding: 0;
+    color: red;
 }
