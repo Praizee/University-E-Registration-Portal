@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="styles.css">
     <!-- <link rel="stylesheet" href="w3css.css"> -->
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3193/3193101.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../fontawesome-free-6.3.0-web/css/all.min.css">
 
     <!-- firebase authentication -->
     <script src="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth__en.js"></script>
@@ -40,15 +41,18 @@
                 height="50px"></a>
         <h3>Login Here</h3>
 
-        <label for="username" class="label">Matriculation Number</label>
-        <!-- <input type="text" class="text" placeholder="Email or Phone" id="username"> -->
-        <input type="text" pattern="{15}" class="text" placeholder="NSC/2022/001" required id="username">
+        <label for="username" class="label">Email Address</label>
+        <input type="text" class="text" placeholder="example@gmail.com" id="email">
+        <!-- <label for="username" class="label">Matriculation Number</label> -->
+        <!-- <input type="text" pattern="{15}" class="text" placeholder="NSC/2022/001" required id="username"> -->
+        <!-- <input type="text" pattern="{15}" class="text" placeholder="NSC/2022/001" required id="username"> -->
         <!-- pattern="[A-Za-z][0-9]{15}" -->
 
 
         <label for="password" class="label">Password</label>
-        <input type="password" class="text" placeholder="Password" required
+        <input type="password" id="psw" class="text" placeholder="Password" required
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Ex: Student123">
+        <i class="fas fa-eye" onclick="Function01()"></i>
         <!-- title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters" -->
         <br>
         <!-- pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}" -->
@@ -60,9 +64,9 @@
                 Forgot password?
             </a>
         </span>
-        <a href="../../STUDENT DASHBOARD/dashboard-02/index.html">
-            <button type="button">Log In</button>
-        </a>
+        <!-- <a href="../../STUDENT DASHBOARD/dashboard-02/index.html"> -->
+        <button type="submit">Log In</button>
+        <!-- </a> -->
         <!-- <div class="social">
             <div class="go"><i class="fab fa-google"></i> Google</div>
             <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
@@ -94,6 +98,8 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
+
+        submitData
     </script>
     <!-- end of firebase -->
 </body>
