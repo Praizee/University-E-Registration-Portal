@@ -11,9 +11,9 @@ function makePayment() {
             consumer_mac: "92a3-912ba-1192a",
         },
         customer: {
-            email: "",
-            phone_number: "",
-            name: "",
+            email: "thebellstech23@gmail.com",
+            phone_number: "09012345678",
+            name: "The Bells Tech",
         },
         customizations: {
             title: "E-Payments",
