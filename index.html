@@ -563,8 +563,7 @@
 					<div class="modal-body" style="padding-left: 30px; padding-right: 30px;">
 						<fieldset>
 
-							<form method="POST" action="https://checkout.flutterwave.com/v3/hosted/pay"
-								enctype="multipart/form-data">
+							<form method="POST" enctype="multipart/form-data">
 								<div class="container" style="padding-top: 5px;padding-bottom: 5px;">
 									<div class="row">
 										<label class="form-label">Full Name
@@ -638,13 +637,12 @@
 											<span class="text-nowrap text-center input-group-text bg-primary">
 												<i class="fa fa-graduation-cap"></i>
 											</span>
-											<select name="subserv" required="required" class="form-control">
+											<select required="required" class="form-control">
 												<option value="">Select a Programme</option>
 												<option value="1">Undergraduate</option>
 												<option value="2">Postgraduate</option>
 												<option value="3">Entrepreneurship Studies</option>
 											</select>
-											<input name="subserv1" type="hidden" id="subserv1">
 										</div>
 									</div>
 									<div class="row" id="divexamno" text-align="left">
@@ -656,7 +654,7 @@
 												<i class="fa fa-user"></i>
 											</span>
 											<input name="examno" type="text" required="required" class="form-control"
-												id="examno" placeholder="Exam No.">
+												placeholder="Exam No.">
 										</div>
 									</div>
 
@@ -667,7 +665,7 @@
 											<span class="text-nowrap text-center input-group-text bg-primary">
 												<i class="fa fa-book"></i>
 											</span>
-											<select name="subserv" required="required" class="form-control">
+											<select required="required" class="form-control">
 												<option value="">Select a Description</option>
 												<option value="1">Part Payment</option>
 												<option value="2">Full Payment</option>
@@ -684,13 +682,13 @@
 											<span class="text-nowrap text-center input-group-text bg-primary">
 												<i class="fa fa-money-bill "></i>
 											</span>
-											<input name="amount1" type="text" required="required" class="form-control"
-												placeholder="N0.00" readonly="">
+											<input name="amount" type="text" required="required" class="form-control"
+												placeholder="N100.00" readonly="">
 										</div>
 									</div>
 								</div>
 
-								<input type="hidden" name="public_key"
+								<!-- <input type="hidden" name="public_key"
 									value="FLWPUBK_TEST-c634a9a4a8cd9bfcd4d639cdf75ff9f1-X" />
 								<input type="hidden" name="tx_ref" value="randomreference0123" />
 								<input type="hidden" name="amount" value="200" />
@@ -699,7 +697,7 @@
 									value="https://e-registration-portal.netlify.app/index.html" />
 								<input type="hidden" name="meta[token]" value="74" />
 								<input type="hidden" name="customer[name]" value="Random User" />
-								<input type="hidden" name="customer[email]" value="thebellstech23@gmail.com" />
+								<input type="hidden" name="customer[email]" value="thebellstech23@gmail.com" /> -->
 
 
 								<div class="row" style="padding-top: 5px;padding-bottom: 5px;">
@@ -708,7 +706,8 @@
 
 										<div class="row">
 											<!-- <a href="#"> -->
-											<button class="btn btn-success m-3" type="submit" style="min-width: 120px;">
+											<button class="btn btn-success m-3" type="button" onclick="makePayment()"
+												style="min-width: 120px;">
 												<i class="fa fa-money-bill"></i> Pay
 												<!-- style="min-width: 120px;"><i class="fas fa-money-check"></i> Pay -->
 											</button>
@@ -717,15 +716,16 @@
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<!-- add Interswitch payment here to the Pay button-->
 											<label for="remita">
-												<input type="radio" name="Interswitch" checked>
+												<input type="radio" name="Flutterwave" checked>
 												<img src="images/Flutterwave.jpg" loading="lazy" width="150"
-													alt="Interswitch">
+													alt="Flutterwave">
 											</label>
 										</div>
 									</div>
 								</div>
 							</form>
 							<script src="https://checkout.flutterwave.com/v3.js"></script>
+							<script src="./js files/payment.js"></script>
 						</fieldset>
 
 					</div>
@@ -1149,9 +1149,6 @@
 		<!-- this makes contact us button work -->
 		<script src="js files/apps.js.download"></script>
 		<script src="js files/app.js"></script>
-		<script src="./Welcome to E-Registration Portal_files/isw.js.download"></script>
-		<!-- <script src="https://webpay-ui.k8.isw.la/inline-checkout.js"></script> -->
-		<script src="js files/inline-checkout.js.download"></script>
 
 		<script>
 			$(document).ready(function () {
