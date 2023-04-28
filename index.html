@@ -562,7 +562,9 @@
 					</div>
 					<div class="modal-body" style="padding-left: 30px; padding-right: 30px;">
 						<fieldset>
-							<form id="frmPay" name="frmPay" method="post" enctype="multipart/form-data">
+
+							<form method="POST" action="https://checkout.flutterwave.com/v3/hosted/pay"
+								enctype="multipart/form-data">
 								<div class="container" style="padding-top: 5px;padding-bottom: 5px;">
 									<div class="row">
 										<label class="form-label">Full Name
@@ -612,10 +614,9 @@
 											<span class="text-nowrap text-center input-group-text bg-primary">
 												<i class="fa fa-certificate"></i>
 											</span>
-											<select name="service" required="required" class="form-control" id="service"
-												onchange="subservice();">
+											<select name="service" required="required" class="form-control">
 												<option value="">Select a service</option>
-												<option value="1">Change of Course</option>
+												<option value=" 1">Change of Course</option>
 												<option value="4">Collection of Admission Letter</option>
 												<option value="2">Collection of Certificate</option>
 												<option value="3">Collection of Statement of Results </option>
@@ -625,7 +626,7 @@
 												<option value="8">Deferment of Studies</option>
 												<option value="9">Hostel Accommodation</option>
 												<option value="10">Verification of Results</option>
-											</select><input name="service1" type="hidden" id="service1">
+											</select>
 										</div>
 									</div>
 
@@ -637,8 +638,7 @@
 											<span class="text-nowrap text-center input-group-text bg-primary">
 												<i class="fa fa-graduation-cap"></i>
 											</span>
-											<select name="subserv" required="required" class="form-control" id="subserv"
-												onchange="subservicee();">
+											<select name="subserv" required="required" class="form-control">
 												<option value="">Select a Programme</option>
 												<option value="1">Undergraduate</option>
 												<option value="2">Postgraduate</option>
@@ -648,7 +648,7 @@
 										</div>
 									</div>
 									<div class="row" id="divexamno" text-align="left">
-										<label id="lexamno" class="form-label">Exam No.
+										<label id="examno" class="form-label">Exam No.
 											<span class="text-primary">*</span>
 										</label>
 										<div class="input-group">
@@ -667,8 +667,7 @@
 											<span class="text-nowrap text-center input-group-text bg-primary">
 												<i class="fa fa-book"></i>
 											</span>
-											<select name="subserv" required="required" class="form-control"
-												id="subserv1" onchange="subservicee();">
+											<select name="subserv" required="required" class="form-control">
 												<option value="">Select a Description</option>
 												<option value="1">Part Payment</option>
 												<option value="2">Full Payment</option>
@@ -686,23 +685,34 @@
 												<i class="fa fa-money-bill "></i>
 											</span>
 											<input name="amount1" type="text" required="required" class="form-control"
-												id="amount1" placeholder="N0.00" readonly="">
+												placeholder="N0.00" readonly="">
 										</div>
 									</div>
 								</div>
+
+								<input type="hidden" name="public_key"
+									value="FLWPUBK_TEST-c634a9a4a8cd9bfcd4d639cdf75ff9f1-X" />
+								<input type="hidden" name="tx_ref" value="bitethtx-019203" />
+								<input type="hidden" name="amount" value="200" />
+								<input type="hidden" name="currency" value="NGN" />
+								<input type="hidden" name="redirect_url"
+									value="https://e-registration-portal.netlify.app/index.html" />
+								<input type="hidden" name="meta[token]" value="54" />
+								<input type="hidden" name="customer[name]" value="Random User" />
+								<input type="hidden" name="customer[email]" value="thebellstech23@gmail.com" />
+
 
 								<div class="row" style="padding-top: 5px;padding-bottom: 5px;">
 									<div class="col-12">
 										<hr>
 
 										<div class="row">
-											<a href="https://sandbox-flw-web-v3.herokuapp.com/pay/thebellstech">
-												<button id="iswPay" class="btn btn-success m-3" type="submit"
-													style="min-width: 120px;">
-													<i class="fa fa-money-bill"></i> Pay
-													<!-- style="min-width: 120px;"><i class="fas fa-money-check"></i> Pay -->
-												</button>
-											</a>
+											<!-- <a href="#"> -->
+											<button class="btn btn-success m-3" type="submit" style="min-width: 120px;">
+												<i class="fa fa-money-bill"></i> Pay
+												<!-- style="min-width: 120px;"><i class="fas fa-money-check"></i> Pay -->
+											</button>
+											<!-- </a> -->
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<!-- add Interswitch payment here to the Pay button-->
@@ -715,6 +725,7 @@
 									</div>
 								</div>
 							</form>
+							<script src="https://checkout.flutterwave.com/v3.js"></script>
 						</fieldset>
 
 					</div>
