@@ -22,6 +22,12 @@
     <link rel="stylesheet" href="styles.css">
     <!-- <link rel="stylesheet" href="w3css.css"> -->
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3193/3193101.png" type="image/x-icon">
+
+    <!-- firebase authentication -->
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth__en.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.css" />
+    <script src="firebase.js"></script>
+    <!-- end of firebase -->
 </head>
 
 <body>
@@ -63,6 +69,33 @@
         </div> -->
     </form>
 
+
+
+    <!-- firebase -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyAnqiFyvwuh2S5m_dT5VtALZJY8BwG-mrg",
+            authDomain: "login-d4f6c.firebaseapp.com",
+            projectId: "login-d4f6c",
+            storageBucket: "login-d4f6c.appspot.com",
+            messagingSenderId: "776758456731",
+            appId: "1:776758456731:web:d9eb145c37bb17d892713e",
+            measurementId: "G-M2NGW7C9YK"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
+    <!-- end of firebase -->
 </body>
 
 </html>
