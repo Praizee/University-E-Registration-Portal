@@ -5,7 +5,7 @@ function makePayment() {
         amount: 50,
         currency: "NGN",
         payment_options: "card, mobilemoneyghana, ussd",
-        redirect_url: "https://glaciers.titanic.com/handle-flutterwave-payment",
+        redirect_url: "https://e-registration-portal.netlify.app/index.html",
         meta: {
             consumer_id: 23,
             consumer_mac: "92a3-912ba-1192a",
@@ -17,7 +17,7 @@ function makePayment() {
         },
         customizations: {
             title: "E-Payments",
-            description: "Payment for an Course Registration",
+            description: "Payment for a Course Registration",
             logo: "https://e-registration-portal.netlify.app/images/cropped-Bells-Logo.2png.png",
             // logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
         },
