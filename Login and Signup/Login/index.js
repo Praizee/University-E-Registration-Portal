@@ -1,3 +1,15 @@
+// show/hide password
+function Function01() {
+    var x = document.getElementById("psw");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
+
+
 // WhatsApp script
 
 var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?27319';
