@@ -33,8 +33,6 @@
 
 <body>
     <div class="background">
-        <!-- <div class="shape"></div>
-        <div class="shape"></div> -->
     </div>
     <form>
         <a href="../../index.html">
@@ -44,16 +42,15 @@
         </h3>
 
         <label for="username" class="label">Email Address</label>
-        <input type="text" id="email" name="email" class="text" placeholder="example@gmail.com" required>
-        <!-- <label for="username" class="label">Matriculation Number</label> -->
-        <!-- <input type="text" pattern="{15}" class="text" placeholder="NSC/2022/001" required id="username"> -->
+        <input type="email" id="email" name="email" class="text" placeholder="example@gmail.com" required>
         <!-- <input type="text" pattern="{15}" class="text" placeholder="NSC/2022/001" required id="username"> -->
         <!-- pattern="[A-Za-z][0-9]{15}" -->
 
         <div class="password-box">
             <label for="password" class="label">Password</label>
             <input type="password" id="psw" name="psw" class="text" placeholder="Password" required
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Ex: Student123">
+                title="Ex: Student123">
+            <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" -->
 
             <i class="fas fa-eye" onclick="Function01()" title="Show/Hide Password"></i>
             <!-- title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters" -->
@@ -61,18 +58,21 @@
                 least 6 characters</p>
         </div>
         <br>
+
         <!-- pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}" -->
+
         <div class="remember">
             <input type="checkbox" class="check" value="Remember Me" checked>
             <label for="checkbox">Remember Me</label>
         </div>
+
         <span class="reset-pwd">
             <a href="reset-password.html" style="text-decoration: none;" title="Click here to reset password">
                 Forgot password?
             </a>
         </span>
         <!-- <a href="../../STUDENT DASHBOARD/dashboard-02/index.html"> -->
-        <button type="button" id="submitData" name="submitData">Log In</button>
+        <button type="submit" id="submitData" name="submitData">Log In</button>
         <!-- </a> -->
         <!-- <div class="social">
             <div class="go"><i class="fab fa-google"></i> Google</div>
@@ -88,6 +88,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-analytics.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
