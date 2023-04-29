@@ -66,7 +66,7 @@
             <input type="checkbox" class="check" value="Remember Me" checked>
             <label for="checkbox">Remember Me</label>
         </div>
-        <span class="psw">
+        <span class="reset-pwd">
             <a href="reset-password.html" style="text-decoration: none;" title="Click here to reset password">
                 Forgot password?
             </a>
@@ -87,7 +87,7 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-analytics.js";
-
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -96,6 +96,7 @@
         const firebaseConfig = {
             apiKey: "AIzaSyAnqiFyvwuh2S5m_dT5VtALZJY8BwG-mrg",
             authDomain: "login-d4f6c.firebaseapp.com",
+            databaseURL: "https://login-d4f6c-default-rtdb.firebaseio.com",
             projectId: "login-d4f6c",
             storageBucket: "login-d4f6c.appspot.com",
             messagingSenderId: "776758456731",
@@ -108,8 +109,6 @@
         const analytics = getAnalytics(app);
         const auth = getAuth();
         const database = getDatabase(app);
-
-
 
         submitData.addEventListener('click', (e) => {
 
@@ -171,13 +170,14 @@
                     alert(errorMessage);
                 });
 
-        sign out user
+            // sign out user
             signOut(auth).then(() => {
                 // Sign-out successful.
             }).catch((error) => {
                 // An error happened.
             });
         });
+
     </script>
     <!-- end of firebase -->
 </body>
