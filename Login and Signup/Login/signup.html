@@ -124,7 +124,7 @@
                     const user = userCredential.user;
                     // ...user.uid
                     set(ref(database, 'users/' + user.uid), {
-                        username: username, // Add the username to the data that you save
+                        username: username, // add username field
                         email: email,
                         password: password
                     })
@@ -145,6 +145,7 @@
                     // ..
                     alert(errorMessage);
                 });
+
 
         });
     </script>
