@@ -38,9 +38,13 @@ span.reset-pwd {
     padding-top: 16px;
 }
 
+.signup {
+    margin-right: 6.5rem;
+}
+
 .remember {
-    margin-top: 10px;
-    margin-bottom: -20px;
+    margin-top: 0px;
+    margin-bottom: -5px;
 }
 
 .background {
