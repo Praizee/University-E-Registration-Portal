@@ -204,18 +204,31 @@
 
         const logoutBtn = document.getElementById('logout');
 
-        logoutBtn.addEventListener('click', (e) => {
+        // Get the logout link element
+        const logoutLink = document.getElementById('logout');
+
+        // Add click event listener to logout link
+        logoutLink.addEventListener('click', (e) => {
             e.preventDefault();
-            signOut(auth)
-                .then(() => {
-                    // User signed out successfully
-                    // Redirect to login page
-                    window.location.href = '../../Login and Signup/Login/Login form.html';
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
+
+            // Show confirmation prompt
+            if (window.confirm('Are you sure you want to log out?')) {
+
+                // Perform sign-out operation
+                signOut(auth)
+                    .then(() => {
+                        // Sign-out successful.
+                        // Redirect to login page
+                        window.location.href = '../../Login and Signup/Login/Login form.html';
+                    })
+                    .catch((error) => {
+                        // An error happened.
+                        console.error(error);
+                    });
+
+            }
         });
+
 
 
     </script>
