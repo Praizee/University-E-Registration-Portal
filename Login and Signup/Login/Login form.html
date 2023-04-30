@@ -25,8 +25,8 @@
     <link rel="stylesheet" href="../../fontawesome-free-6.3.0-web/css/all.min.css">
 
     <!-- firebase authentication -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth__en.js"></script> -->
-    <!-- <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.css" /> -->
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth__en.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.css" />
     <!-- end of firebase auth cdn-->
 
     <!-- firebase -->
@@ -113,7 +113,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth();
         const database = getDatabase(app);
-        const dashBoard = 'https://e-registration-portal.netlify.app/student%20dashboard/dashboard-02/'; // Replace with your login page URL
+        const dashBoard = '../../STUDENT DASHBOARD/dashboard-02/index.html'; // Replace with your login page URL
 
         const analytics = getAnalytics(app);
 
