@@ -113,6 +113,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth();
         const database = getDatabase(app);
+        const dashBoard = 'https://e-registration-portal.netlify.app/student%20dashboard/dashboard-02/'; // Replace with your login page URL
 
         const analytics = getAnalytics(app);
 
@@ -134,6 +135,8 @@
                         .then(() => {
                             // Data saved successfully!
                             alert('User logged in successfully!');
+                            window.location.href = dashBoard; // Redirect to dashboard
+
                         })
                         .catch((error) => {
                             // The write failed...
