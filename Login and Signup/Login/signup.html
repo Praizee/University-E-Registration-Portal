@@ -20,6 +20,7 @@
     <title>SignUp</title>
     <script src="index.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="signup.css">
     <!-- <link rel="stylesheet" href="w3css.css"> -->
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3193/3193101.png" type="image/x-icon">
     <link rel="stylesheet" href="../../fontawesome-free-6.3.0-web/css/all.min.css">
@@ -43,10 +44,10 @@
         </a>
         <h3>Sign Up </h3>
 
-        <!-- <label for="fullname" class="label">Full Name</label>
-        <input type="text" id="fullname" name="fullname" class="text" placeholder="example@gmail.com" required> -->
+        <label for="username" class="label">Full Name</label>
+        <input type="text" id="username" name="username" class="text" placeholder="Name Surname" required>
 
-        <label for="username" class="label">Email Address</label>
+        <label for="email" class="label">Email Address</label>
         <input type="email" id="email" name="email" class="text" placeholder="example@gmail.com" autofocus required>
         <!-- <input type="text" pattern="{15}" class="text" placeholder="NSC/2022/001" required id="username"> -->
         <!-- pattern="[A-Za-z][0-9]{15}" -->
@@ -115,6 +116,7 @@
 
             var email = document.getElementById('email').value;
             var password = document.getElementById('psw').value;
+            var username = document.getElementById('username').value; // Add this line to get the username input value
 
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
@@ -122,7 +124,7 @@
                     const user = userCredential.user;
                     // ...user.uid
                     set(ref(database, 'users/' + user.uid), {
-                        // username: name,
+                        username: username, // Add the username to the data that you save
                         email: email,
                         password: password
                     })
