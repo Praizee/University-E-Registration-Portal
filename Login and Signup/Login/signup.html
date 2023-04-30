@@ -106,8 +106,9 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth();
-        const database = getDatabase();
+        const database = getDatabase(app);
 
+        const loginUrl = 'https://e-registration-portal.netlify.app/login%20and%20signup/login/login%20form'; // Replace with your login page URL
         const analytics = getAnalytics(app);
 
         submitData.addEventListener('click', (e) => {
@@ -120,7 +121,21 @@
                     // Signed in 
                     const user = userCredential.user;
                     // ...user.uid
-                    alert('User created successfully! 👍🏼');
+                    set(ref(database, 'users/' + user.uid), {
+                        // username: name,
+                        email: email,
+                        password: password
+                    })
+                        .then(() => {
+                            // Data saved successfully!
+                            alert('User created successfully!');
+                            window.location.href = loginUrl; // Redirect to login page
+                        })
+                        .catch((error) => {
+                            // The write failed...
+                            alert(error);
+                        });
+                    // alert('User created successfully! 👍🏼');
                 })
                 .catch((error) => {
                     const errorCode = error.code;
