@@ -207,6 +207,20 @@
         // Get the logout link element
         const logoutLink = document.getElementById('logout');
 
+        // get current user
+        const user = auth.currentUser;
+
+        // get user data from Firebase
+        get(ref(database, 'users/' + user.uid)).then((snapshot) => {
+            const userData = snapshot.val();
+            const username = userData.username;
+            // display welcome message with username
+            alert('Welcome ' + username + '!');
+        }).catch((error) => {
+            alert(error);
+        });
+
+
         // Add click event listener to logout link
         logoutLink.addEventListener('click', (e) => {
             e.preventDefault();
