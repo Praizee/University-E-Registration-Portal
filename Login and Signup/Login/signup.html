@@ -36,8 +36,6 @@
 </head>
 
 <body>
-    <div class="background">
-    </div>
     <form>
         <a href="../../index.html">
             <img src="../../images/Bells-University-of-Technology-Ota-282-×-88-px-2.png" alt="" height="50px">
@@ -46,6 +44,9 @@
 
         <label for="username" class="label">Full Name</label>
         <input type="text" id="username" name="username" class="text" placeholder="First Name, Surname" required>
+
+        <label for="matric_no" class="label">Matriculation Number</label>
+        <input type="text" id="matric_no" name="matric_no" class="text" placeholder="NSC/2022/001" required>
 
         <label for="email" class="label">Email Address</label>
         <input type="email" id="email" name="email" class="text" placeholder="example@gmail.com" autofocus required>
@@ -72,7 +73,9 @@
         <!-- </a> -->
         <br><br>
 
-        Have an account?<a href="./Login form.html" style="text-decoration: none;"> Login</a>
+        <p class="login-link">
+            Have an account?<a href="./Login form.html" style="text-decoration: none;"> Login</a>
+        </p>
         <!-- <div class="social">
             <div class="go"><i class="fab fa-google"></i> Google</div>
             <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
@@ -126,7 +129,8 @@
                     set(ref(database, 'users/' + user.uid), {
                         username: username, // add username field
                         email: email,
-                        password: password
+                        password: password,
+                        matric_no: matric_no
                     })
                         .then(() => {
                             // Data saved successfully!
