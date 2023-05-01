@@ -120,6 +120,7 @@
             var email = document.getElementById('email').value;
             var password = document.getElementById('psw').value;
             var username = document.getElementById('username').value; // Add this line to get the username input value
+            var matric_no = document.getElementById('matric_no').value; // Add this line to get the matric no input value
 
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
