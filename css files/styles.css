@@ -5,17 +5,28 @@
 
 
 /* this media query ensures that mobile devices are not allowed to view the page */
-@media screen and (max-device-width : 1150px) {
+@media screen and (max-width: 1150px) {
 
   /* or 950px */
-  html,
-  body {
+  * {
     display: none;
-    background-color: Black;
+  }
+
+  .disabled-devices h1,
+  p {
+    color: black;
+    display: block;
+    text-align: center;
+    margin-top: 5rem;
+    font-size: 36px;
   }
 }
 
 /* end of media query */
+
+.disabled-devices {
+  display: none;
+}
 
 /* back to top button  - unused*/
 /* #btn-back-to-top {
