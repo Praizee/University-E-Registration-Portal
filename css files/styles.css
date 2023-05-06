@@ -13,7 +13,7 @@
     background: yellow;
   }
 
-  .disabled-devices h1,
+  /* .disabled-devices h1,
   p {
     color: black;
     display: block;
@@ -22,13 +22,11 @@
     margin-left: auto;
     margin-right: auto;
     font-size: 36px;
-  }
+  } */
 
-  .main-body {
+  /* .main-body {
     display: none;
-  }
-
-
+  } */
 }
 
 /* end of media query */
