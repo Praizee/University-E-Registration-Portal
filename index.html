@@ -33,7 +33,7 @@
 
 	<!-- fontawesome links 5 & 6-->
 	<!-- <link rel="stylesheet" href="css files/font-awesome.min.css"> -->
-	<link rel="stylesheet" href="./fontawesome-free-5.12.1-web/css/all.min.css">
+	<!-- <link rel="stylesheet" href="./fontawesome-free-5.12.1-web/css/all.min.css"> -->
 	<link rel="stylesheet" href="./fontawesome-free-6.3.0-web/css/all.min.css">
 	<!-- end of fontawesome -->
 
@@ -48,7 +48,7 @@
 	<!-- links to styles -->
 	<link rel="stylesheet" href="css files/Data-Table.css">
 	<link rel="stylesheet" href="css files/Highlight-Phone.css">
-	<link rel="stylesheet" href="css files/dataTables.bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="css files/dataTables.bootstrap.min.css"> -->
 	<link rel="stylesheet" href="css files/animate.min.css">
 	<link rel="stylesheet" href="css files/Pretty-Footer.css">
 	<link rel="stylesheet" href="css files/Sidebar-right-opening.css">
@@ -79,7 +79,7 @@
 	<script type="text/javascript" src="js files/jquery.countdown.min.js.download">
 	</script>
 	<script src="js files/index.js"></script>
-	<script>
+	<!-- <script>
 		$(document).ready(function (e) {
 			$('#counter').countdown({
 				until: +1663146, expiryUrl: 'settime.php',
@@ -87,7 +87,7 @@
 			});
 		});
 
-	</script>
+	</script> -->
 
 	<script type="text/javascript">
 		function MM_openBrWindow(theURL, winName, features) { //v2.0
@@ -103,7 +103,7 @@
 
 <!-- BODY -->
 
-<body cz-shortcut-listen="true">
+<body cz-shortcut-listen="true" id="body">
 	<!-- hidden paragraph for disabled mobile devices -->
 	<div class="disabled-devices">
 		<h1>Mobile is unsupported!</h1>
@@ -593,7 +593,8 @@
 						<div class="modal-body" style="padding-left: 30px; padding-right: 30px;">
 							<fieldset>
 
-								<form method="POST" enctype="multipart/form-data">
+								<!-- add method="POST" to this form-->
+								<form enctype="multipart/form-data">
 									<div class="container" style="padding-top: 5px;padding-bottom: 5px;">
 										<div class="row">
 											<label class="form-label">Full Name
@@ -1091,8 +1092,8 @@
 					<div class="modal-content">
 						<div class="modal-header">
 
-							<button class="modal-title btn btn-success" type="button"
-								onclick="window.open('print.php?st=1668124854');"><i class="fa fa-print">
+							<button class="modal-title btn btn-success" type="button" onclick="window.open('');"><i
+									class="fa fa-print">
 									Print</i></button>
 							<button id="stclose" class="btn-close btn-primary rounded" type="button"
 								data-dismiss="modal" aria-label="Close" onclick="stclose();">X</button>
@@ -1173,7 +1174,7 @@
 			<!----------------------------------------------------------------------->
 
 			<script src="js files/jQuery.print.min.js.download"></script>
-			<script src="js files/dataTables.bootstrap.min.js.download"></script>
+			<!-- <script src="js files/dataTables.bootstrap.min.js.download"></script> -->
 			<script src="js files/bs-animation.js.download"></script>
 			<script src="js files/jquery.toast.min.js.download"></script>
 			<script src="js files/jquery-confirm.min.js.download"></script>
