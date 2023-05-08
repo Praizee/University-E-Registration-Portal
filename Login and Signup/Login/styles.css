@@ -33,9 +33,10 @@ input {
     color: #eaf0fb;
 }
 
-span.reset-pwd {
-    float: right;
-    padding-top: 16px;
+.reset-pwd a {
+    /* float: right; */
+    display: block;
+    margin-top: 1rem;
 }
 
 .signup {
