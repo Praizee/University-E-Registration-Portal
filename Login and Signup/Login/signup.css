@@ -8,9 +8,18 @@ form {
     position: absolute;
     margin-top: 80px;
     margin-bottom: 4rem;
-    height: 730px;
+    height: 720px;
     padding-bottom: 20px;
     /* padding-top: 10px; */
+}
+
+.label {
+    margin-top: 20px;
+}
+
+.email01 {
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 #submitData {
