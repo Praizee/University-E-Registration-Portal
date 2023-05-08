@@ -33,7 +33,7 @@ input {
     color: #eaf0fb;
 }
 
-.reset-pwd a {
+p.signup-link {
     /* float: right; */
     display: block;
     margin-top: 1rem;
@@ -216,7 +216,7 @@ select {
 
 .instruction {
     margin-top: 1.5rem;
-    font-size: 0.75rem;
+    font-size: 0.73rem;
     padding: 0;
     color: red;
 }
