@@ -18,7 +18,6 @@ if (isMobile) {
     alert("Mobile devices are currently not supported.");
     window.stop(); // Stop further loading/rendering of the page
 }
-
 // Continue with the regular page loading and functionality
 
 
@@ -41,12 +40,13 @@ if (isMobile) {
 //MM_openBrWindow('receipt/clearance.php','Receipt','width=400');
 // }
 
-// alert("You are advised to view this page on a desktop/laptop")
-// alert("Mobile ")
 
 //Start of Tawk.to Script
 
 //End of Tawk.to Script
+
+
+
 
 
 // WhatsApp script
